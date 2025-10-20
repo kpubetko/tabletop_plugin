@@ -46,6 +46,7 @@
                 double max = LengthBoundaries[1];
                 if (value < min || value > max)
                 {
+                    _length = -1;
                     return;
                 }
                 else
@@ -71,6 +72,7 @@
                 double max = WidthBoundaries[1];
                 if (value < min || value > max)
                 {
+                    _width = -1;
                     return;
                 }
                 else
@@ -97,6 +99,7 @@
                 double max = HeightBoundaries[1];
                 if (value < min || value > max)
                 {
+                    _height = -1;
                     return;
                 }
                 else
@@ -122,6 +125,7 @@
                 double max = CornerRadiusBoundaries[1];
                 if (value < min || value > max)
                 {
+                    _cornerRadius = -1;
                     return;
                 }
                 else
@@ -147,6 +151,7 @@
                 double max = ChamferRadiusBoundaries[1];
                 if (value < min || value > max)
                 {
+                    _chamferRadius = -1;
                     return;
                 }
                 else
