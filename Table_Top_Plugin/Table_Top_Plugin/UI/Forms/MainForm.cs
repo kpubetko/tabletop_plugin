@@ -14,7 +14,8 @@ namespace Table_Top_Plugin
         private readonly ToolTip _toolTipHeight = new ToolTip();
         private readonly ToolTip _toolTipCornerRadius = new ToolTip();
         private readonly ToolTip _toolTipChamfer = new ToolTip();
-        private readonly KompasConnector _kompas = new KompasConnector();
+        private KompasConnector _kompas = new KompasConnector();
+        private TableTopBuilder _builder;
 
         /// <summary>
         /// Конструктор главной формы
@@ -22,6 +23,7 @@ namespace Table_Top_Plugin
         public MainForm()
         {
             InitializeComponent();
+            _builder = new TableTopBuilder(_kompas.Kompas);
         }
 
         /// <summary>
@@ -222,8 +224,7 @@ namespace Table_Top_Plugin
                     {
                         _kompas.Connect();
                     }
-                    var builder = new TableTopBuilder(_kompas.Kompas);
-                    builder.Build(_parameters.Length, _parameters.Width, _parameters.Height, _parameters.CornerRadius, _parameters.ChamferRadius);
+                    _builder.Build(_parameters.Length, _parameters.Width, _parameters.Height, _parameters.CornerRadius, _parameters.ChamferRadius);
                 });
 
                 progressBar1.Visible = false;

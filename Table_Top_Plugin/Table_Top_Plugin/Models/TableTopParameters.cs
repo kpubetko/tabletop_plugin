@@ -21,19 +21,19 @@
         private double _chamferRadius = -1;
 
         /// <summary>Минимальные и максимальные границы длины</summary>
-        public readonly double[] LengthBoundaries = [1000, 2500];
+        public readonly double[] LengthBoundaries = new double[] { 1000, 2500 };
 
         /// <summary>Минимальные и максимальные границы ширины</summary>
-        public readonly double[] WidthBoundaries = [1000, 2500];
+        public readonly double[] WidthBoundaries = new double[] { 1000, 2500 };
 
         /// <summary>Минимальные и максимальные границы высоты</summary>
-        public readonly double[] HeightBoundaries = [15, 50];
+        public readonly double[] HeightBoundaries = new double[] { 15, 50 };
 
         /// <summary>Минимальные и максимальные границы радиуса углов</summary>
-        public readonly double[] CornerRadiusBoundaries = [0, 1000];
+        public readonly double[] CornerRadiusBoundaries = new double[] { 0, 1000 };
 
         /// <summary>Минимальные и максимальные границы радиуса фаски</summary>
-        public readonly double[] ChamferRadiusBoundaries = [0, 25];
+        public readonly double[] ChamferRadiusBoundaries = new double[] { 0, 25 };
 
         /// <summary>
         /// Длина столешницы
