@@ -1,6 +1,7 @@
 ﻿using Kompas6API5;
 using Kompas6Constants;
 using Kompas6Constants3D;
+using Table_Top_Plugin.Models;
 
 namespace Table_Top_Plugin.Services
 {
@@ -28,8 +29,13 @@ namespace Table_Top_Plugin.Services
         /// <param name="height">Высота</param>
         /// <param name="cornerRadius">Радиус скругления углов</param>
         /// <param name="chamferRadius">Радиус фаски</param>
-        public void Build(double length, double width, double height, double cornerRadius, double chamferRadius)
+        public void Build(TableTopParameters tableTopParameters)
         {
+            double length = tableTopParameters.GetLength.GetValue;
+            double width = tableTopParameters.GetWidth.GetValue;
+            double height = tableTopParameters.GetHeight.GetValue;
+            double cornerRadius = tableTopParameters.GetCornerRadius.GetValue;
+            double chamferRadius = tableTopParameters.GetChamferRadius.GetValue;
             if (cornerRadius > width / 2) cornerRadius = width / 2;
             if (chamferRadius > height / 2) chamferRadius = height / 2;
 
