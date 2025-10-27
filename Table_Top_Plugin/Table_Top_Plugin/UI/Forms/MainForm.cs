@@ -35,20 +35,6 @@ namespace Table_Top_Plugin
             parameterItem_ChamferRadius.ChangeValueText("0");
         }
 
-        /// <summary>
-        /// Получение строки с ограничениями
-        /// </summary>
-        /// <param name="constraints">Массив ограничений</param>
-        /// <returns>Строка с ограничениями</returns>
-        private string GetConstraintsString(double[] constraints)
-        {
-            string constraintsToReturn = "";
-            if (constraints.Length == 2)
-            {
-                constraintsToReturn += "от " + constraints[0].ToString() + " до " + constraints[1].ToString();
-            }
-            return constraintsToReturn;
-        }
 
         private bool CheckValues()
         {

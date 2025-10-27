@@ -38,9 +38,9 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.Controls.Add(label_Name, 0, 0);
             tableLayoutPanel1.Controls.Add(textBox_Value, 1, 0);
             tableLayoutPanel1.Controls.Add(label_Bounds, 2, 0);
@@ -65,7 +65,7 @@
             // textBox_Value
             // 
             textBox_Value.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox_Value.Location = new Point(135, 6);
+            textBox_Value.Location = new Point(169, 6);
             textBox_Value.Name = "textBox_Value";
             textBox_Value.Size = new Size(326, 39);
             textBox_Value.TabIndex = 1;
@@ -76,7 +76,7 @@
             // 
             label_Bounds.Anchor = AnchorStyles.Left;
             label_Bounds.AutoSize = true;
-            label_Bounds.Location = new Point(467, 10);
+            label_Bounds.Location = new Point(501, 10);
             label_Bounds.Name = "label_Bounds";
             label_Bounds.Size = new Size(94, 32);
             label_Bounds.TabIndex = 2;
