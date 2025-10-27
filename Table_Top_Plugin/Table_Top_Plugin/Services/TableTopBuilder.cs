@@ -36,8 +36,6 @@ namespace Table_Top_Plugin.Services
             double height = tableTopParameters.GetHeight.GetValue;
             double cornerRadius = tableTopParameters.GetCornerRadius.GetValue;
             double chamferRadius = tableTopParameters.GetChamferRadius.GetValue;
-            if (cornerRadius > width / 2) cornerRadius = width / 2;
-            if (chamferRadius > height / 2) chamferRadius = height / 2;
 
             ksDocument3D document3D = (ksDocument3D)_kompas.Document3D();
             document3D.Create(false, true);

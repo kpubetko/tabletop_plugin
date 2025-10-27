@@ -11,14 +11,33 @@ namespace Table_Top_Plugin.Models
         double _value;
         double _minValue;
         double _maxValue;
-        Action _action;
-       
+        List<Action> _actionsIfItChanged = new List<Action>();
 
         public Parameter(double min, double max, Action act = null)
         {
             SetBoundaries(min, max);
-            _action = act;
+            if(act != null)
+            {
+                _actionsIfItChanged.Add(act);
+            }
         }
+        public void AddAction(Action act)
+        {
+            if (act != null)
+            {
+                _actionsIfItChanged.Add(act);
+            }
+        }
+        //public void CallActions()
+        //{
+        //    if (_actionsIfItChanged.Count != 0)
+        //    {
+        //        foreach (Action action in _actionsIfItChanged)
+        //        {
+        //            action.Invoke();
+        //        }
+        //    }
+        //}
         public double SetValue
         {
             set
@@ -32,9 +51,12 @@ namespace Table_Top_Plugin.Models
                     return;
                 }
                 _value = value;
-                if(_action != null)
+                if(_actionsIfItChanged.Count != 0)
                 {
-                    _action.Invoke();
+                    foreach(Action action in _actionsIfItChanged)
+                    {
+                        action.Invoke();
+                    }
                 }
             }
         }
@@ -57,6 +79,13 @@ namespace Table_Top_Plugin.Models
             }
             _minValue = min;
             _maxValue = max;
+            if (_actionsIfItChanged.Count != 0)
+            {
+                foreach (Action action in _actionsIfItChanged)
+                {
+                    action.Invoke();
+                }
+            }
         }
         public double GetMin
         {

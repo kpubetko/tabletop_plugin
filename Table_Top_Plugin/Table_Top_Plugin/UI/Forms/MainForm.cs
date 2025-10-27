@@ -1,5 +1,6 @@
 ﻿using Table_Top_Plugin.Models;
 using Table_Top_Plugin.Services;
+using Table_Top_Plugin.UI.UserControls;
 
 namespace Table_Top_Plugin
 {
@@ -11,7 +12,6 @@ namespace Table_Top_Plugin
         private readonly TableTopParameters _parameters = new TableTopParameters();
         private KompasConnector _kompas = new KompasConnector();
         private TableTopBuilder _builder;
-
         /// <summary>
         /// Конструктор главной формы
         /// </summary>
@@ -20,15 +20,19 @@ namespace Table_Top_Plugin
             InitializeComponent();
             parameterItem_Length.ChangeNameText("Введите длину:");
             parameterItem_Length.SetParameter(_parameters.GetLength);
+            parameterItem_Length.ChangeValueText("0");
             parameterItem_Width.ChangeNameText("Введите ширину:");
             parameterItem_Width.SetParameter(_parameters.GetWidth);
+            parameterItem_Width.ChangeValueText("0");
             parameterItem_Height.ChangeNameText("Введите высоту:");
             parameterItem_Height.SetParameter(_parameters.GetHeight);
+            parameterItem_Height.ChangeValueText("0");
             parameterItem_CornerRadius.ChangeNameText("Введите скругление углов:");
             parameterItem_CornerRadius.SetParameter(_parameters.GetCornerRadius);
+            parameterItem_CornerRadius.ChangeValueText("0");
             parameterItem_ChamferRadius.ChangeNameText("Введите скругление фаски:");
             parameterItem_ChamferRadius.SetParameter(_parameters.GetChamferRadius);
-            _builder = new TableTopBuilder(_kompas.Kompas);
+            parameterItem_ChamferRadius.ChangeValueText("0");
         }
 
         /// <summary>
@@ -46,45 +50,43 @@ namespace Table_Top_Plugin
             return constraintsToReturn;
         }
 
-
+        private bool CheckValues()
+        {
+            bool ok = true;
+            foreach (Control c in tableLayoutPanel1.Controls)
+            {
+                if (c is ParameterItem item)
+                {
+                    if (!item.Ok)
+                    {
+                        ok = false;
+                        break;
+                    }
+                }
+            }
+            return ok;
+        }
       
 
         private async void button_Build_Click(object sender, EventArgs e)
         {
 
-            //// Установка параметров
-            //_parameters.Length = double.Parse(textBox_LengthValue.Text);
-            //_parameters.Width = double.Parse(textBox_WidthValue.Text);
-            //_parameters.Height = double.Parse(textBox_HeightValue.Text);
-            //_parameters.CornerRadius = double.Parse(textBox_CornerRadiusValue.Text);
-            //_parameters.ChamferRadius = double.Parse(textBox_ChamferRadiusValue.Text);
+            if (CheckValues())
+            {
+                progressBar1.Visible = true;
 
-            //if (_parameters.CheckValues())
-            //{
-            //    // Обновление значений в текстовых полях (после возможной корректировки)
-            //    textBox_LengthValue.Text = _parameters.Length.ToString();
-            //    textBox_WidthValue.Text = _parameters.Width.ToString();
-            //    textBox_HeightValue.Text = _parameters.Height.ToString();
-            //    textBox_CornerRadiusValue.Text = _parameters.CornerRadius.ToString();
-            //    textBox_ChamferRadiusValue.Text = _parameters.ChamferRadius.ToString();
+                await Task.Run(() =>
+                {
+                    if (!_kompas.IsConnected)
+                    {
+                        _kompas.Connect();
+                        _builder = new TableTopBuilder(_kompas.Kompas);
+                    }
+                    _builder.Build(_parameters);
+                });
 
-            //    progressBar1.Visible = true;
-
-            //    await Task.Run(() =>
-            //    {
-            //        if (!_kompas.IsConnected)
-            //        {
-            //            _kompas.Connect();
-            //        }
-            //        _builder.Build(_parameters.Length, _parameters.Width, _parameters.Height, _parameters.CornerRadius, _parameters.ChamferRadius);
-            //    });
-
-            //    progressBar1.Visible = false;
-            //}
-            //else
-            //{
-            //    FindExceptions();
-            //}
+                progressBar1.Visible = false;
+            }
         }
     }
 }

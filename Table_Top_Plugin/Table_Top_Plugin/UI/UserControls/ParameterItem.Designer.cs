@@ -69,7 +69,6 @@
             textBox_Value.Name = "textBox_Value";
             textBox_Value.Size = new Size(326, 39);
             textBox_Value.TabIndex = 1;
-            textBox_Value.Text = "0";
             textBox_Value.TextChanged += textBox_Value_TextChanged;
             textBox_Value.Validating += textBox_Value_Validating;
             // 

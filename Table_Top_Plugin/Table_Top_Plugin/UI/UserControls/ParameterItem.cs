@@ -15,24 +15,37 @@ namespace Table_Top_Plugin.UI.UserControls
     public partial class ParameterItem : UserControl
     {
         Parameter _parameter;
+        string _unit = "мм";
+        bool _ok = false;
         public ParameterItem()
         {
             InitializeComponent();
         }
-
+        public bool Ok
+        {
+            get
+            {
+                return _ok;
+            }
+        }
         public void SetParameter(Parameter param)
         {
             _parameter = param;
-            ChangeBoundsText(_parameter.GetMin, _parameter.GetMax);
+            _parameter.AddAction(ChangeBoundsText);
+            ChangeBoundsText();
+        }
+        public void ChangeValueText(string value)
+        {
+            textBox_Value.Text = value;
         }
         public void ChangeNameText(string name)
         {
             label_Name.Text = name;
         }
 
-        public void ChangeBoundsText(double min, double max)
+        public void ChangeBoundsText()
         {
-            label_Bounds.Text = "от " + min.ToString() + " до " + max.ToString();
+            label_Bounds.Text = "от " + Math.Round(_parameter.GetMin, 0).ToString() + " до " + Math.Round(_parameter.GetMax, 1).ToString() + " " + _unit;
         }
 
         private void textBox_Value_Validating(object sender, CancelEventArgs e)
@@ -56,10 +69,12 @@ namespace Table_Top_Plugin.UI.UserControls
                 if (double.Parse(textBox_Value.Text) < _parameter.GetMin || double.Parse(textBox_Value.Text) > _parameter.GetMax)
                 {
                     textBox_Value.BackColor = Color.Pink;
+                    _ok = false;
                 }
                 else
                 {
                     textBox_Value.BackColor = SystemColors.Control;
+                    _ok = true;
                 }
 
             }

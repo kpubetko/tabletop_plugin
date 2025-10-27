@@ -5,26 +5,41 @@
     /// </summary>
     public class TableTopParameters
     {
-        /// <summary>Длина столешницы</summary>
-        Parameter _length = new Parameter(1000, 2500, ChangeSMTH);
-        /// <summary>Ширина столешницы</summary>
-        Parameter _width = new Parameter(1000, 2500);
-        /// <summary>Высота столешницы</summary>
-        Parameter _height = new Parameter(15, 50);
-        /// <summary>Радиус скругления углов</summary>
-        Parameter _cornerRadius = new Parameter(0, 1000);
-        /// <summary>Радиус фаски</summary>
-        Parameter _chamferRadius = new Parameter(0, 25);
+        private Dictionary<ParametersList, Parameter> _parameters;
 
-        public static void ChangeSMTH()
+        public TableTopParameters()
         {
-            
+            _parameters = new Dictionary<ParametersList, Parameter>()
+            {
+                { ParametersList.Length, new Parameter(1000, 2500, LengthOrWidthChanged) },
+                { ParametersList.Width, new Parameter(1000, 2500, LengthOrWidthChanged) },
+                { ParametersList.Height, new Parameter(15, 50, HeightChanged) },
+                { ParametersList.CornerRadius, new Parameter(0, 0) },
+                { ParametersList.ChamferRadius, new Parameter(0, 0) }
+            };
+        }
+
+        
+        public void LengthOrWidthChanged()
+        {
+            if(_parameters[ParametersList.Length].GetValue < _parameters[ParametersList.Width].GetValue)
+            {
+                _parameters[ParametersList.CornerRadius].SetBoundaries(_parameters[ParametersList.CornerRadius].GetMin, _parameters[ParametersList.Length].GetValue / 2);
+            }
+            else
+            {
+                _parameters[ParametersList.CornerRadius].SetBoundaries(_parameters[ParametersList.CornerRadius].GetMin, _parameters[ParametersList.Width].GetValue / 2);
+            }
+        }
+        public void HeightChanged()
+        {
+            _parameters[ParametersList.ChamferRadius].SetBoundaries(_parameters[ParametersList.ChamferRadius].GetMin, _parameters[ParametersList.Height].GetValue/2);
         }
         public Parameter GetLength
         {
             get
             {
-                return _length;
+                return _parameters[ParametersList.Length];
             }
         }
 
@@ -32,7 +47,7 @@
         {
             get
             {
-                return _width;
+                return _parameters[ParametersList.Width];
             }
         }
 
@@ -40,7 +55,7 @@
         {
             get
             {
-                return _height;
+                return _parameters[ParametersList.Height];
             }
         }
 
@@ -48,7 +63,7 @@
         {
             get
             {
-                return _cornerRadius;
+                return _parameters[ParametersList.CornerRadius];
             }
         }
 
@@ -56,7 +71,7 @@
         {
             get
             {
-                return _chamferRadius;
+                return _parameters[ParametersList.ChamferRadius];
             }
         }
         /// <summary>
