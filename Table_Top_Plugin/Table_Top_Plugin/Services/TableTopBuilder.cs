@@ -10,16 +10,7 @@ namespace Table_Top_Plugin.Services
     /// </summary>
     public class TableTopBuilder
     {
-        private readonly KompasObject _kompas;
-
-        /// <summary>
-        /// Конструктор построителя столешницы
-        /// </summary>
-        /// <param name="kompas">Объект КОМПАС-3D</param>
-        public TableTopBuilder(KompasObject kompas)
-        {
-            _kompas = kompas;
-        }
+        private KompasConnector _kompas = new KompasConnector();
 
         /// <summary>
         /// Построение столешницы
@@ -31,15 +22,19 @@ namespace Table_Top_Plugin.Services
         /// <param name="chamferRadius">Радиус фаски</param>
         public void Build(TableTopParameters tableTopParameters)
         {
+            if (!_kompas.IsConnected)
+            {
+                _kompas.Connect();
+            }
             double length = tableTopParameters.GetLength.GetValue;
             double width = tableTopParameters.GetWidth.GetValue;
             double height = tableTopParameters.GetHeight.GetValue;
             double cornerRadius = tableTopParameters.GetCornerRadius.GetValue;
             double chamferRadius = tableTopParameters.GetChamferRadius.GetValue;
 
-            ksDocument3D document3D = (ksDocument3D)_kompas.Document3D();
+            ksDocument3D document3D = (ksDocument3D)_kompas.Kompas.Document3D();
             document3D.Create(false, true);
-            document3D = (ksDocument3D)_kompas.ActiveDocument3D();
+            document3D = (ksDocument3D)_kompas.Kompas.ActiveDocument3D();
 
             ksPart part = (ksPart)document3D.GetPart((int)Part_Type.pTop_Part);
 
@@ -52,7 +47,7 @@ namespace Table_Top_Plugin.Services
 
             if (cornerRadius <= 0)
             {
-                ksRectangleParam rectangleParam = (ksRectangleParam)_kompas.GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
+                ksRectangleParam rectangleParam = (ksRectangleParam)_kompas.Kompas.GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
                 rectangleParam.Init();
                 rectangleParam.x = 0;
                 rectangleParam.y = 0;

@@ -10,7 +10,6 @@ namespace Table_Top_Plugin
     public partial class MainForm : Form
     {
         private readonly TableTopParameters _parameters = new TableTopParameters();
-        private KompasConnector _kompas = new KompasConnector();
         private TableTopBuilder _builder;
         /// <summary>
         /// Конструктор главной формы
@@ -43,7 +42,7 @@ namespace Table_Top_Plugin
             {
                 if (c is ParameterItem item)
                 {
-                    if (!item.Ok)
+                    if (!item.IsItCorrect)
                     {
                         ok = false;
                         break;
@@ -63,11 +62,6 @@ namespace Table_Top_Plugin
 
                 await Task.Run(() =>
                 {
-                    if (!_kompas.IsConnected)
-                    {
-                        _kompas.Connect();
-                        _builder = new TableTopBuilder(_kompas.Kompas);
-                    }
                     _builder.Build(_parameters);
                 });
 

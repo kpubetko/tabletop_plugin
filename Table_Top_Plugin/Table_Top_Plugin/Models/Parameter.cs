@@ -11,33 +11,17 @@ namespace Table_Top_Plugin.Models
         double _value;
         double _minValue;
         double _maxValue;
-        List<Action> _actionsIfItChanged = new List<Action>();
+        public event EventHandler ParameterChanged;
 
-        public Parameter(double min, double max, Action act = null)
+        public Parameter(double min, double max)
         {
             SetBoundaries(min, max);
-            if(act != null)
-            {
-                _actionsIfItChanged.Add(act);
-            }
         }
-        public void AddAction(Action act)
+        protected virtual void OnParameterChanged()
         {
-            if (act != null)
-            {
-                _actionsIfItChanged.Add(act);
-            }
+            ParameterChanged?.Invoke(this, EventArgs.Empty);
         }
-        //public void CallActions()
-        //{
-        //    if (_actionsIfItChanged.Count != 0)
-        //    {
-        //        foreach (Action action in _actionsIfItChanged)
-        //        {
-        //            action.Invoke();
-        //        }
-        //    }
-        //}
+        
         public double SetValue
         {
             set
@@ -51,13 +35,7 @@ namespace Table_Top_Plugin.Models
                     return;
                 }
                 _value = value;
-                if(_actionsIfItChanged.Count != 0)
-                {
-                    foreach(Action action in _actionsIfItChanged)
-                    {
-                        action.Invoke();
-                    }
-                }
+                OnParameterChanged();
             }
         }
         public double GetValue
@@ -79,13 +57,7 @@ namespace Table_Top_Plugin.Models
             }
             _minValue = min;
             _maxValue = max;
-            if (_actionsIfItChanged.Count != 0)
-            {
-                foreach (Action action in _actionsIfItChanged)
-                {
-                    action.Invoke();
-                }
-            }
+            OnParameterChanged();
         }
         public double GetMin
         {

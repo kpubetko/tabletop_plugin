@@ -10,28 +10,32 @@ using System.Windows.Forms;
 using Table_Top_Plugin.Models;
 using Table_Top_Plugin.Services;
 
+
 namespace Table_Top_Plugin.UI.UserControls
 {
     public partial class ParameterItem : UserControl
     {
         Parameter _parameter;
         string _unit = "мм";
-        bool _ok = false;
+        bool _isItCorrect = false;
+        ToolTip _toolTip;
         public ParameterItem()
         {
             InitializeComponent();
+            _toolTip = new ToolTip();
+            _toolTip.SetToolTip(textBox_Value, "");
         }
-        public bool Ok
+        public bool IsItCorrect
         {
             get
             {
-                return _ok;
+                return _isItCorrect;
             }
         }
         public void SetParameter(Parameter param)
         {
             _parameter = param;
-            _parameter.AddAction(ChangeBoundsText);
+            _parameter.ParameterChanged += ChangeBoundsText;
             ChangeBoundsText();
         }
         public void ChangeValueText(string value)
@@ -43,7 +47,7 @@ namespace Table_Top_Plugin.UI.UserControls
             label_Name.Text = name;
         }
 
-        public void ChangeBoundsText()
+        public void ChangeBoundsText(object sender = null, EventArgs e = null)
         {
             label_Bounds.Text = "от " + Math.Round(_parameter.GetMin, 0).ToString() + " до " + Math.Round(_parameter.GetMax, 1).ToString() + " " + _unit;
         }
@@ -61,24 +65,35 @@ namespace Table_Top_Plugin.UI.UserControls
         {
             if (!double.TryParse(textBox_Value.Text, out double value))
             {
-                
+
             }
             else
             {
                 _parameter.SetValue = double.Parse(textBox_Value.Text);
                 if (double.Parse(textBox_Value.Text) < _parameter.GetMin || double.Parse(textBox_Value.Text) > _parameter.GetMax)
                 {
+                    string message;
+                    if (double.Parse(textBox_Value.Text) < _parameter.GetMin)
+                    {
+                        message = "Значение должно быть не меньше " + _parameter.GetMin.ToString() + ", следите за границами (справа)";
+                        _toolTip.Show(message, textBox_Value);
+                    }
+                    else
+                    {
+                        message = "Значение должно быть не больше " + _parameter.GetMax.ToString() + ", следите за границами (справа)";
+                        _toolTip.Show(message, textBox_Value);
+                    }
                     textBox_Value.BackColor = Color.Pink;
-                    _ok = false;
+                    _isItCorrect = false;
                 }
                 else
                 {
                     textBox_Value.BackColor = SystemColors.Control;
-                    _ok = true;
+                    _toolTip.Show("", textBox_Value);
+                    _isItCorrect = true;
                 }
 
             }
-            
         }
     }
 }
