@@ -75,12 +75,12 @@ namespace Table_Top_Plugin.UI.UserControls
                     string message;
                     if (double.Parse(textBox_Value.Text) < _parameter.GetMin)
                     {
-                        message = "Значение должно быть не меньше " + _parameter.GetMin.ToString() + ", следите за границами (справа)";
+                        message = "Значение должно быть не меньше " + _parameter.GetMin.ToString();
                         _toolTip.Show(message, textBox_Value);
                     }
                     else
                     {
-                        message = "Значение должно быть не больше " + _parameter.GetMax.ToString() + ", следите за границами (справа)";
+                        message = "Значение должно быть не больше " + _parameter.GetMax.ToString();
                         _toolTip.Show(message, textBox_Value);
                     }
                     textBox_Value.BackColor = Color.Pink;
