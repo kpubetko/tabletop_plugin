@@ -75,6 +75,8 @@
             tableLayoutPanel1.Controls.Add(parameterItem_Length, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.MaximumSize = new Size(798, 652);
+            tableLayoutPanel1.MinimumSize = new Size(798, 652);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 7;
             tableLayoutPanel1.RowStyles.Add(new RowStyle());

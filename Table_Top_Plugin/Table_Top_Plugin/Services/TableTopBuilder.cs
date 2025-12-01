@@ -11,7 +11,6 @@ namespace Table_Top_Plugin.Services
     public class TableTopBuilder
     {
         private KompasConnector _kompas = new KompasConnector();
-
         /// <summary>
         /// Построение столешницы
         /// </summary>
@@ -25,6 +24,10 @@ namespace Table_Top_Plugin.Services
             if (!_kompas.IsConnected)
             {
                 _kompas.Connect();
+                if (!_kompas.IsConnected)
+                {
+                    return;
+                }
             }
             double length = tableTopParameters.GetLength.GetValue;
             double width = tableTopParameters.GetWidth.GetValue;

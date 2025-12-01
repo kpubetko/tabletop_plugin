@@ -11,25 +11,23 @@ namespace Table_Top_Plugin.Models
         double _value;
         double _minValue;
         double _maxValue;
+
         public event EventHandler ParameterChanged;
 
         public Parameter(double min, double max)
         {
             SetBoundaries(min, max);
         }
+
         protected virtual void OnParameterChanged()
         {
             ParameterChanged?.Invoke(this, EventArgs.Empty);
         }
-        
+
         public double SetValue
         {
             set
             {
-                if(_minValue == null || _maxValue == null)
-                {
-                    return;
-                }
                 if(value > _maxValue || value < _minValue)
                 {
                     return;
@@ -38,6 +36,7 @@ namespace Table_Top_Plugin.Models
                 OnParameterChanged();
             }
         }
+
         public double GetValue
         {
             get
@@ -45,7 +44,6 @@ namespace Table_Top_Plugin.Models
                 return _value;
             }
         }
-
 
         public void SetBoundaries(double min, double max)
         {
@@ -59,6 +57,7 @@ namespace Table_Top_Plugin.Models
             _maxValue = max;
             OnParameterChanged();
         }
+
         public double GetMin
         {
             get
@@ -66,6 +65,7 @@ namespace Table_Top_Plugin.Models
                 return _minValue;
             }
         }
+
         public double GetMax
         {
             get

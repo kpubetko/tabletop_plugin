@@ -49,7 +49,8 @@ namespace Table_Top_Plugin.UI.UserControls
 
         public void ChangeBoundsText(object sender = null, EventArgs e = null)
         {
-            label_Bounds.Text = "от " + Math.Round(_parameter.GetMin, 0).ToString() + " до " + Math.Round(_parameter.GetMax, 1).ToString() + " " + _unit;
+            label_Bounds.Text = "от " + Math.Round(_parameter.GetMin, 0).ToString() +
+                " до " + Math.Round(_parameter.GetMax, 1).ToString() + " " + _unit;
         }
 
         private void textBox_Value_Validating(object sender, CancelEventArgs e)
@@ -70,7 +71,8 @@ namespace Table_Top_Plugin.UI.UserControls
             else
             {
                 _parameter.SetValue = double.Parse(textBox_Value.Text);
-                if (double.Parse(textBox_Value.Text) < _parameter.GetMin || double.Parse(textBox_Value.Text) > _parameter.GetMax)
+                if (double.Parse(textBox_Value.Text) < _parameter.GetMin 
+                    || double.Parse(textBox_Value.Text) > _parameter.GetMax)
                 {
                     string message;
                     if (double.Parse(textBox_Value.Text) < _parameter.GetMin)
