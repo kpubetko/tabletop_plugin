@@ -10,7 +10,7 @@ namespace Table_Top_Plugin
     public partial class MainForm : Form
     {
         private readonly TableTopParameters _parameters = new TableTopParameters();
-        private TableTopBuilder _builder;
+        private TableTopBuilder _builder = new TableTopBuilder();
         /// <summary>
         /// Конструктор главной формы
         /// </summary>
