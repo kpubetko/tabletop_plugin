@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Table_Top_Plugin\Table_Top_Plugin.csproj" />
+    <ProjectReference Include="..\Table_Top_Plugin\TableTopPlugin.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,5 @@
-
-namespace TableTopPlugin.App
+using TableTopPluginUI.UI;
+namespace TableTopPluginUI
 {
     internal static class Program
     {
@@ -11,8 +11,8 @@ namespace TableTopPlugin.App
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            //ApplicationConfiguration.Initialize();
-            //Application.Run(new MainForm());
+            ApplicationConfiguration.Initialize();
+            Application.Run(new MainForm());
         }
     }
 }

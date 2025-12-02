@@ -1,4 +1,4 @@
-﻿namespace Table_Top_Plugin
+﻿namespace TableTopPluginUI.UI
 {
     partial class MainForm
     {
@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             button_Build = new Button();
-            progressBar1 = new ProgressBar();
+            progressBarMain = new ProgressBar();
             tableLayoutPanel1 = new TableLayoutPanel();
-            parameterItem_ChamferRadius = new Table_Top_Plugin.UI.UserControls.ParameterItem();
-            parameterItem_CornerRadius = new Table_Top_Plugin.UI.UserControls.ParameterItem();
-            parameterItem_Height = new Table_Top_Plugin.UI.UserControls.ParameterItem();
-            parameterItem_Width = new Table_Top_Plugin.UI.UserControls.ParameterItem();
-            parameterItem_Length = new Table_Top_Plugin.UI.UserControls.ParameterItem();
+            parameterItem_ChamferRadius = new TableTopPluginUI.UI.UserControls.ParameterItem();
+            parameterItem_CornerRadius = new TableTopPluginUI.UI.UserControls.ParameterItem();
+            parameterItem_Height = new TableTopPluginUI.UI.UserControls.ParameterItem();
+            parameterItem_Width = new TableTopPluginUI.UI.UserControls.ParameterItem();
+            parameterItem_Length = new TableTopPluginUI.UI.UserControls.ParameterItem();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -51,16 +51,16 @@
             button_Build.UseVisualStyleBackColor = true;
             button_Build.Click += button_Build_Click;
             // 
-            // progressBar1
+            // progressBarMain
             // 
-            progressBar1.Anchor = AnchorStyles.Top;
-            tableLayoutPanel1.SetColumnSpan(progressBar1, 3);
-            progressBar1.Location = new Point(171, 613);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(455, 30);
-            progressBar1.Style = ProgressBarStyle.Marquee;
-            progressBar1.TabIndex = 16;
-            progressBar1.Visible = false;
+            progressBarMain.Anchor = AnchorStyles.Top;
+            tableLayoutPanel1.SetColumnSpan(progressBarMain, 3);
+            progressBarMain.Location = new Point(171, 613);
+            progressBarMain.Name = "progressBarMain";
+            progressBarMain.Size = new Size(455, 30);
+            progressBarMain.Style = ProgressBarStyle.Marquee;
+            progressBarMain.TabIndex = 16;
+            progressBarMain.Visible = false;
             // 
             // tableLayoutPanel1
             // 
@@ -71,7 +71,7 @@
             tableLayoutPanel1.Controls.Add(parameterItem_Height, 0, 2);
             tableLayoutPanel1.Controls.Add(parameterItem_Width, 0, 1);
             tableLayoutPanel1.Controls.Add(button_Build, 0, 5);
-            tableLayoutPanel1.Controls.Add(progressBar1, 0, 6);
+            tableLayoutPanel1.Controls.Add(progressBarMain, 0, 6);
             tableLayoutPanel1.Controls.Add(parameterItem_Length, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
@@ -143,7 +143,7 @@
 
         #endregion
         private Button button_Build;
-        private ProgressBar progressBar1;
+        private ProgressBar progressBarMain;
         private TableLayoutPanel tableLayoutPanel1;
         private UI.UserControls.ParameterItem parameterItem_ChamferRadius;
         private UI.UserControls.ParameterItem parameterItem_CornerRadius;

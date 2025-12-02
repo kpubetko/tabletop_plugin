@@ -1,8 +1,6 @@
 ﻿using Kompas6API5;
-using System;
-using System.Runtime.InteropServices;
 
-namespace Table_Top_Plugin.Services
+namespace TableTopPlugin.Services
 {
     /// <summary>
     /// Коннектор для подключения к КОМПАС-3D
@@ -22,6 +20,13 @@ namespace Table_Top_Plugin.Services
         /// <summary>
         /// Подключение к КОМПАС-3D
         /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Возникает при невозможности создания экземпляра КОМПАС-3D
+        /// </exception>
+        /// <remarks>
+        /// Метод пытается создать экземпляр КОМПАС-3D через COM-интерфейс.
+        /// При успешном подключении делает приложение видимым.
+        /// </remarks>
         public void Connect()
         {
             if (IsConnected) return;

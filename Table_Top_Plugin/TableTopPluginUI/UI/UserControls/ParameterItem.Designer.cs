@@ -1,4 +1,4 @@
-﻿namespace Table_Top_Plugin.UI.UserControls
+﻿namespace TableTopPluginUI.UI.UserControls
 {
     partial class ParameterItem
     {
