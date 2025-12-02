@@ -28,9 +28,12 @@
                 { ParametersList.CornerRadius, new Parameter(0, 0) },
                 { ParametersList.ChamferRadius, new Parameter(0, 0) }
             };
-            _parameters[ParametersList.Length].ParameterChanged += LengthOrWidthChanged;
-            _parameters[ParametersList.Width].ParameterChanged += LengthOrWidthChanged;
-            _parameters[ParametersList.Height].ParameterChanged += HeightChanged;
+            _parameters[ParametersList.Length].ParameterChanged
+                += LengthOrWidthChanged;
+            _parameters[ParametersList.Width].ParameterChanged
+                += LengthOrWidthChanged;
+            _parameters[ParametersList.Height].ParameterChanged
+                += HeightChanged;
         }
 
         /// <summary>
@@ -44,14 +47,17 @@
         /// </remarks>
         private void LengthOrWidthChanged(object sender, EventArgs e)
         {
-            if (_parameters[ParametersList.Length].Value < _parameters[ParametersList.Width].Value)
+            if (_parameters[ParametersList.Length].Value <
+                _parameters[ParametersList.Width].Value)
             {
-                _parameters[ParametersList.CornerRadius].SetBoundaries(_parameters[ParametersList.CornerRadius].Min,
+                _parameters[ParametersList.CornerRadius].SetBoundaries(
+                    _parameters[ParametersList.CornerRadius].Min,
                     _parameters[ParametersList.Length].Value / 2);
             }
             else
             {
-                _parameters[ParametersList.CornerRadius].SetBoundaries(_parameters[ParametersList.CornerRadius].Min,
+                _parameters[ParametersList.CornerRadius].SetBoundaries(
+                    _parameters[ParametersList.CornerRadius].Min,
                     _parameters[ParametersList.Width].Value / 2);
             }
         }
@@ -67,7 +73,8 @@
         /// </remarks>
         public void HeightChanged(object sender, EventArgs e)
         {
-            _parameters[ParametersList.ChamferRadius].SetBoundaries(_parameters[ParametersList.ChamferRadius].Min,
+            _parameters[ParametersList.ChamferRadius].SetBoundaries(
+                _parameters[ParametersList.ChamferRadius].Min,
                 _parameters[ParametersList.Height].Value / 2);
         }
 

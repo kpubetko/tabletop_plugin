@@ -155,9 +155,12 @@ namespace Table_Top_Plugin.Tests.Models
             bool heightEventRaised = false;
 
             //TODO: RSDN
-            _tableTopParams.Length.ParameterChanged += (s, e) => lengthEventRaised = true;
-            _tableTopParams.Width.ParameterChanged += (s, e) => widthEventRaised = true;
-            _tableTopParams.Height.ParameterChanged += (s, e) => heightEventRaised = true;
+            _tableTopParams.Length.ParameterChanged += (s, e) =>
+            lengthEventRaised = true;
+            _tableTopParams.Width.ParameterChanged += (s, e) =>
+            widthEventRaised = true;
+            _tableTopParams.Height.ParameterChanged += (s, e) =>
+            heightEventRaised = true;
 
             _tableTopParams.Length.Value = 1500;
             _tableTopParams.Width.Value = 1500;

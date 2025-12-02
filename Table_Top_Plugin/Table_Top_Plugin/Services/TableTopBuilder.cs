@@ -72,8 +72,10 @@ namespace TableTopPlugin.Services
         private void CreateSketch()
         {
             _sketch = (ksEntity)_part.NewEntity((int)Obj3dType.o3d_sketch);
-            ksSketchDefinition sketchDefinition = (ksSketchDefinition)_sketch.GetDefinition();
-            sketchDefinition.SetPlane(_part.GetDefaultEntity((int)Obj3dType.o3d_planeXOY));
+            ksSketchDefinition sketchDefinition =
+                (ksSketchDefinition)_sketch.GetDefinition();
+            sketchDefinition.SetPlane(_part.GetDefaultEntity(
+                (int)Obj3dType.o3d_planeXOY));
             _sketch.Create();
         }
 
@@ -83,10 +85,13 @@ namespace TableTopPlugin.Services
         /// <param name="length">Длина столешницы</param>
         /// <param name="width">Ширина столешницы</param>
         /// <param name="cornerRadius">Радиус скругления углов</param>
-        private void DrawSketchGeometry(double length, double width, double cornerRadius)
+        private void DrawSketchGeometry(double length, double width,
+            double cornerRadius)
         {
-            ksSketchDefinition sketchDefinition = (ksSketchDefinition)_sketch.GetDefinition();
-            ksDocument2D document2D = (ksDocument2D)sketchDefinition.BeginEdit();
+            ksSketchDefinition sketchDefinition =
+                (ksSketchDefinition)_sketch.GetDefinition();
+            ksDocument2D document2D =
+                (ksDocument2D)sketchDefinition.BeginEdit();
 
             if (cornerRadius <= 0)
             {
@@ -94,7 +99,8 @@ namespace TableTopPlugin.Services
             }
             else
             {
-                DrawRoundedRectangle(document2D, length, width, cornerRadius);
+                DrawRoundedRectangle(document2D, length, width,
+                    cornerRadius);
             }
 
             sketchDefinition.EndEdit();
@@ -106,9 +112,12 @@ namespace TableTopPlugin.Services
         /// <param name="document2D">2D-документ эскиза</param>
         /// <param name="length">Длина прямоугольника</param>
         /// <param name="width">Ширина прямоугольника</param>
-        private void DrawRectangle(ksDocument2D document2D, double length, double width)
+        private void DrawRectangle(ksDocument2D document2D, double length,
+            double width)
         {
-            ksRectangleParam rectangleParam = (ksRectangleParam)_kompas.Kompas.GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
+            ksRectangleParam rectangleParam = (ksRectangleParam)_kompas.
+                Kompas.GetParamStruct((short)StructType2DEnum.
+                ko_RectangleParam);
             rectangleParam.Init();
             rectangleParam.x = 0;
             rectangleParam.y = 0;
@@ -125,22 +134,30 @@ namespace TableTopPlugin.Services
         /// <param name="length">Длина прямоугольника</param>
         /// <param name="width">Ширина прямоугольника</param>
         /// <param name="cornerRadius">Радиус скругления углов</param>
-        private void DrawRoundedRectangle(ksDocument2D document2D, double length, double width, double cornerRadius)
+        private void DrawRoundedRectangle(ksDocument2D document2D,
+            double length, double width, double cornerRadius)
         {
             double lengthX = length / 2 - cornerRadius;
             double lengthY = width / 2 - cornerRadius;
 
             // Рисуем прямые участки
             document2D.ksLineSeg(-lengthX, width / 2, lengthX, width / 2, 1);
-            document2D.ksLineSeg(length / 2, lengthY, length / 2, -lengthY, 1);
-            document2D.ksLineSeg(lengthX, -width / 2, -lengthX, -width / 2, 1);
-            document2D.ksLineSeg(-length / 2, -lengthY, -length / 2, lengthY, 1);
+            document2D.ksLineSeg(length / 2, lengthY, length / 2,
+                -lengthY, 1);
+            document2D.ksLineSeg(lengthX, -width / 2, -lengthX,
+                -width / 2, 1);
+            document2D.ksLineSeg(-length / 2, -lengthY, -length / 2,
+                lengthY, 1);
 
             // Рисуем скругления в углах
-            document2D.ksArcByAngle(lengthX, lengthY, cornerRadius, 0, 90, 1, 1);
-            document2D.ksArcByAngle(lengthX, -lengthY, cornerRadius, -90, 0, 1, 1);
-            document2D.ksArcByAngle(-lengthX, -lengthY, cornerRadius, -180, -90, 1, 1);
-            document2D.ksArcByAngle(-lengthX, lengthY, cornerRadius, 90, 180, 1, 1);
+            document2D.ksArcByAngle(lengthX, lengthY, cornerRadius, 0,
+                90, 1, 1);
+            document2D.ksArcByAngle(lengthX, -lengthY, cornerRadius, -90,
+                0, 1, 1);
+            document2D.ksArcByAngle(-lengthX, -lengthY, cornerRadius, -180,
+                -90, 1, 1);
+            document2D.ksArcByAngle(-lengthX, lengthY, cornerRadius, 90,
+                180, 1, 1);
         }
 
         /// <summary>
@@ -149,10 +166,13 @@ namespace TableTopPlugin.Services
         /// <param name="height">Высота выдавливания</param>
         private void ExtrudeSketch(double height)
         {
-            ksEntity extrusion = (ksEntity)_part.NewEntity((int)Obj3dType.o3d_baseExtrusion);
-            ksBaseExtrusionDefinition extrusionDefinition = (ksBaseExtrusionDefinition)extrusion.GetDefinition();
+            ksEntity extrusion = 
+                (ksEntity)_part.NewEntity((int)Obj3dType.o3d_baseExtrusion);
+            ksBaseExtrusionDefinition extrusionDefinition =
+                (ksBaseExtrusionDefinition)extrusion.GetDefinition();
             extrusionDefinition.SetSketch(_sketch);
-            extrusionDefinition.directionType = (short)Direction_Type.dtNormal;
+            extrusionDefinition.directionType =
+                (short)Direction_Type.dtNormal;
             extrusionDefinition.SetSideParam(true, 0, height);
             extrusion.Create();
         }
@@ -163,11 +183,14 @@ namespace TableTopPlugin.Services
         /// <param name="chamferRadius">Радиус фаски</param>
         private void CreateFillet(double chamferRadius)
         {
-            ksEntity fillet = (ksEntity)_part.NewEntity((int)Obj3dType.o3d_fillet);
-            ksFilletDefinition filletDefinition = (ksFilletDefinition)fillet.GetDefinition();
+            ksEntity fillet = (ksEntity)_part.NewEntity(
+                (int)Obj3dType.o3d_fillet);
+            ksFilletDefinition filletDefinition =
+                (ksFilletDefinition)fillet.GetDefinition();
             filletDefinition.radius = chamferRadius;
 
-            ksEntityCollection edges = (ksEntityCollection)_part.EntityCollection((short)Obj3dType.o3d_edge);
+            ksEntityCollection edges = (ksEntityCollection)_part.
+                EntityCollection((short)Obj3dType.o3d_edge);
             for (int i = 0; i < edges.GetCount(); i++)
             {
                 ksEntity edge = (ksEntity)edges.GetByIndex(i);

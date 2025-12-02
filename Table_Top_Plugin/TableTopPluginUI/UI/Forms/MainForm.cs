@@ -9,7 +9,8 @@ namespace TableTopPluginUI.UI
     /// </summary>
     public partial class MainForm : Form
     {
-        private readonly TableTopParameters _parameters = new TableTopParameters();
+        private readonly TableTopParameters _parameters =
+            new TableTopParameters();
         private TableTopBuilder _builder = new TableTopBuilder();
 
         /// <summary>
@@ -30,11 +31,15 @@ namespace TableTopPluginUI.UI
             parameterItem_Height.ChangeNameText("Введите высоту:");
             parameterItem_Height.SetParameter(_parameters.Height);
             parameterItem_Height.ChangeValueText("0");
-            parameterItem_CornerRadius.ChangeNameText("Введите скругление углов:");
-            parameterItem_CornerRadius.SetParameter(_parameters.CornerRadius);
+            parameterItem_CornerRadius.ChangeNameText("Введите скругление " +
+                "углов:");
+            parameterItem_CornerRadius.SetParameter(_parameters.
+                CornerRadius);
             parameterItem_CornerRadius.ChangeValueText("0");
-            parameterItem_ChamferRadius.ChangeNameText("Введите скругление фаски:");
-            parameterItem_ChamferRadius.SetParameter(_parameters.ChamferRadius);
+            parameterItem_ChamferRadius.ChangeNameText("Введите скругление" +
+                " фаски:");
+            parameterItem_ChamferRadius.SetParameter(_parameters.
+                ChamferRadius);
             parameterItem_ChamferRadius.ChangeValueText("0");
         }
 

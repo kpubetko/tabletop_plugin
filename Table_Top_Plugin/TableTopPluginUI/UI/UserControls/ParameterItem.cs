@@ -70,8 +70,9 @@ namespace TableTopPluginUI.UI.UserControls
         /// <param name="e">Данные события</param>
         public void ChangeBoundsText(object sender = null, EventArgs e = null)
         {
-            label_Bounds.Text = "от " + Math.Round(_parameter.Min, 0).ToString() +
-                " до " + Math.Round(_parameter.Max, 1).ToString() + " " + _unit;
+            label_Bounds.Text = "от " + Math.Round(_parameter.Min, 0).
+                ToString() + " до " + Math.Round(_parameter.Max, 1).
+                ToString() + " " + _unit;
         }
 
         private void textBox_Value_Validating(object sender, CancelEventArgs e)
@@ -98,12 +99,14 @@ namespace TableTopPluginUI.UI.UserControls
                     string message;
                     if (double.Parse(textBox_Value.Text) < _parameter.Min)
                     {
-                        message = "Значение должно быть не меньше " + _parameter.Min.ToString();
+                        message = "Значение должно быть не меньше " +
+                            _parameter.Min.ToString();
                         _toolTip.Show(message, textBox_Value);
                     }
                     else
                     {
-                        message = "Значение должно быть не больше " + _parameter.Max.ToString();
+                        message = "Значение должно быть не больше " +
+                            _parameter.Max.ToString();
                         _toolTip.Show(message, textBox_Value);
                     }
                     textBox_Value.BackColor = Color.Pink;
