@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Table_Top_Plugin.Models
 {
+    //TODO: XML
     public class Parameter
     {
+        //TODO: RSDN
         double _value;
         double _minValue;
         double _maxValue;
@@ -24,6 +26,7 @@ namespace Table_Top_Plugin.Models
             ParameterChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        //TODO: refactor
         public double SetValue
         {
             set
@@ -37,6 +40,7 @@ namespace Table_Top_Plugin.Models
             }
         }
 
+        //TODO: refactor
         public double GetValue
         {
             get
@@ -45,6 +49,7 @@ namespace Table_Top_Plugin.Models
             }
         }
 
+        //TODO: XML
         public void SetBoundaries(double min, double max)
         {
             if(min > max)
@@ -58,6 +63,7 @@ namespace Table_Top_Plugin.Models
             OnParameterChanged();
         }
 
+        //TODO: refactor
         public double GetMin
         {
             get
@@ -66,6 +72,7 @@ namespace Table_Top_Plugin.Models
             }
         }
 
+        //TODO: refactor
         public double GetMax
         {
             get

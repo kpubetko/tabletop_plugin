@@ -2,16 +2,20 @@
 
 namespace Table_Top_Plugin.Tests.Models
 {
+    //TODO: XML
     public class TableTopParametersTests
     {
+        //TODO: XML
         private TableTopParameters _tableTopParams;
 
+        //TODO: remove
         [SetUp]
         public void Setup()
         {
             _tableTopParams = new TableTopParameters();
         }
 
+        //TODO: description
         [Test]
         public void Constructor_ShouldInitializeAllParametersWithCorrectRanges()
         {
@@ -31,6 +35,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(0, _tableTopParams.GetChamferRadius.GetMax);
         }
 
+        //TODO: description
         [Test]
         public void LengthOrWidthChanged_WhenLengthLessThanWidth_ShouldUpdateCornerRadiusMax()
         {
@@ -42,6 +47,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(900, _tableTopParams.GetCornerRadius.GetMax);
         }
 
+        //TODO: description
         [Test]
         public void LengthOrWidthChanged_WhenWidthLessThanLength_ShouldUpdateCornerRadiusMax()
         {
@@ -53,6 +59,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(800, _tableTopParams.GetCornerRadius.GetMax);
         }
 
+        //TODO: description
         [Test]
         public void HeightChanged_ShouldUpdateChamferRadiusMax()
         {
@@ -63,6 +70,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(20, _tableTopParams.GetChamferRadius.GetMax);
         }
 
+        //TODO: description
         [Test]
         public void GetLength_ShouldReturnLengthParameter()
         {
@@ -70,6 +78,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(1000, _tableTopParams.GetLength.GetMin);
         }
 
+        //TODO: description
         [Test]
         public void GetWidth_ShouldReturnWidthParameter()
         {
@@ -77,6 +86,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(1000, _tableTopParams.GetWidth.GetMin);
         }
 
+        //TODO: description
         [Test]
         public void GetHeight_ShouldReturnHeightParameter()
         {
@@ -84,6 +94,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(15, _tableTopParams.GetHeight.GetMin);
         }
 
+        //TODO: description
         [Test]
         public void GetCornerRadius_ShouldReturnCornerRadiusParameter()
         {
@@ -91,6 +102,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(0, _tableTopParams.GetCornerRadius.GetMin);
         }
 
+        //TODO: description
         [Test]
         public void GetChamferRadius_ShouldReturnChamferRadiusParameter()
         {
@@ -98,6 +110,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(0, _tableTopParams.GetChamferRadius.GetMin);
         }
 
+        //TODO: description
         [Test]
         public void MultipleParameterChanges_ShouldProperlyUpdateDependentParameters()
         {
@@ -112,6 +125,7 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(5, _tableTopParams.GetChamferRadius.GetValue);
         }
 
+        //TODO: description
         [Test]
         public void EventHandlers_ShouldBeConnectedAfterConstructor()
         {
@@ -119,6 +133,7 @@ namespace Table_Top_Plugin.Tests.Models
             bool widthEventRaised = false;
             bool heightEventRaised = false;
 
+            //TODO: RSDN
             _tableTopParams.GetLength.ParameterChanged += (s, e) => lengthEventRaised = true;
             _tableTopParams.GetWidth.ParameterChanged += (s, e) => widthEventRaised = true;
             _tableTopParams.GetHeight.ParameterChanged += (s, e) => heightEventRaised = true;

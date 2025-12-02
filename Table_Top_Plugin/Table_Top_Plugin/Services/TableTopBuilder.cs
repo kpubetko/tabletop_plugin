@@ -10,7 +10,9 @@ namespace Table_Top_Plugin.Services
     /// </summary>
     public class TableTopBuilder
     {
+        //TODO: XML
         private KompasConnector _kompas = new KompasConnector();
+
         /// <summary>
         /// Построение столешницы
         /// </summary>
@@ -21,6 +23,7 @@ namespace Table_Top_Plugin.Services
         /// <param name="chamferRadius">Радиус фаски</param>
         public void Build(TableTopParameters tableTopParameters)
         {
+            //TODO: refactor
             if (!_kompas.IsConnected)
             {
                 _kompas.Connect();

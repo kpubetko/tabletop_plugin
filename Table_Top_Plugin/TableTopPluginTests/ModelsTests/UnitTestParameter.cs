@@ -2,8 +2,10 @@ using Table_Top_Plugin.Models;
 
 namespace Table_Top_PluginTests.ModelsTests
 {
+    //TODO: XML
     public class ParameterTests
     {
+        //TODO: description
         [Test]
         public void Constructor_ShouldInitializeWithCorrectBoundaries()
         {
@@ -14,6 +16,7 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.AreEqual(0.0, parameter.GetValue);
         }
 
+        //TODO: description
         [Test]
         public void Constructor_WhenMinGreaterThanMax_ShouldSwapValues()
         {
@@ -23,6 +26,7 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.AreEqual(30.0, parameter.GetMax);
         }
 
+        //TODO: description
         [Test]
         public void SetValue_WithinRange_ShouldUpdateValue()
         {
@@ -36,6 +40,7 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.IsTrue(eventRaised);
         }
 
+        //TODO: description
         [Test]
         public void SetValue_BelowMin_ShouldNotUpdateValue()
         {
@@ -50,6 +55,7 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.IsFalse(eventRaised);
         }
 
+        //TODO: description
         [Test]
         public void SetValue_AboveMax_ShouldNotUpdateValue()
         {
@@ -64,6 +70,7 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.IsFalse(eventRaised);
         }
 
+        //TODO: description
         [Test]
         public void SetBoundaries_ShouldUpdateMinMax()
         {
@@ -78,6 +85,7 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.IsTrue(eventRaised);
         }
 
+        //TODO: description
         [Test]
         public void SetBoundaries_WhenMinGreaterThanMax_ShouldSwapValues()
         {
@@ -89,6 +97,7 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.AreEqual(40.0, parameter.GetMax);
         }
 
+        //TODO: description
         [Test]
         public void GetMin_ShouldReturnMinimumValue()
         {
@@ -97,6 +106,7 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.AreEqual(5.0, parameter.GetMin);
         }
 
+        //TODO: description
         [Test]
         public void GetMax_ShouldReturnMaximumValue()
         {
