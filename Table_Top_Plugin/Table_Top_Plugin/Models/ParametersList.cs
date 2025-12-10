@@ -1,7 +1,5 @@
-﻿//TODO: RSDN +
-namespace TableTopPlugin.Models
+﻿namespace TableTopPlugin.Models
 {
-    //TODO: XML +
     /// <summary>
     /// Перечисление параметров столешницы
     /// </summary>

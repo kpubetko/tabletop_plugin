@@ -1,14 +1,17 @@
 ﻿namespace TableTopPlugin.Models
 {
-    //TODO: XML +
     /// <summary>
     /// Представляет параметр с ограниченным диапазоном значений
     /// </summary>
     public class Parameter
     {
-        //TODO: RSDN +
+        //TODO: XML
         private double _value;
+
+        //TODO: XML
         private double _minValue;
+
+        //TODO: XML
         private double _maxValue;
 
         /// <summary>
@@ -34,29 +37,6 @@
             ParameterChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        //TODO: refactor +
-        //public double SetValue
-        //{
-        //    set
-        //    {
-        //        if(value > _maxValue || value < _minValue)
-        //        {
-        //            return;
-        //        }
-        //        _value = value;
-        //        OnParameterChanged();
-        //    }
-        //}
-
-        //TODO: refactor +
-        //public double GetValue
-        //{
-        //    get
-        //    {
-        //        return _value;
-        //    }
-        //}
-
         /// <summary>
         /// Получает или задает текущее значение параметра
         /// </summary>
@@ -80,7 +60,6 @@
             }
         }
 
-        //TODO: XML +
         /// <summary>
         /// Устанавливает границы допустимых значений параметра
         /// </summary>
@@ -102,7 +81,6 @@
             OnParameterChanged();
         }
 
-        //TODO: refactor +
         /// <summary>
         /// Получает минимальное значение параметра
         /// </summary>
@@ -114,7 +92,6 @@
             }
         }
 
-        //TODO: refactor +
         /// <summary>
         /// Получает максимальное значение параметра
         /// </summary>

@@ -2,23 +2,19 @@
 
 namespace Table_Top_Plugin.Tests.Models
 {
-    //TODO: XML +
     /// <summary>
     /// Содержит модульные тесты для класса <see cref="TableTopParameters"/>
     /// </summary>
     public class TableTopParametersTests
     {
-        //TODO: XML +
+        //TODO: refactor
         /// <summary>
         /// Экземпляр тестируемого класса
         /// </summary>
-        private TableTopParameters _tableTopParams;
+        private TableTopParameters _tableTopParams;        
 
-        //TODO: remove +
-        
-
-        //TODO: description
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что конструктор инициализирует все параметры столешницы с корректными диапазонами значений")]
         public void Constructor_ShouldInitializeAllParametersWithCorrectRanges()
         {
@@ -39,8 +35,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(0, _tableTopParams.ChamferRadius.Max);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что при изменении длины (когда длина меньше ширины) корректно обновляется максимальное значение радиуса скругления углов")]
         public void LengthOrWidthChanged_WhenLengthLessThanWidth_ShouldUpdateCornerRadiusMax()
         {
@@ -52,8 +48,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(900, _tableTopParams.CornerRadius.Max);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что при изменении ширины (когда ширина меньше длины) корректно обновляется максимальное значение радиуса скругления углов")]
         public void LengthOrWidthChanged_WhenWidthLessThanLength_ShouldUpdateCornerRadiusMax()
         {
@@ -65,8 +61,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(800, _tableTopParams.CornerRadius.Max);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что при изменении высоты корректно обновляется максимальное значение радиуса фаски")]
         public void HeightChanged_ShouldUpdateChamferRadiusMax()
         {
@@ -77,8 +73,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(20, _tableTopParams.ChamferRadius.Max);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что свойство Length возвращает корректный объект параметра длины")]
         public void GetLength_ShouldReturnLengthParameter()
         {
@@ -87,8 +83,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(1000, _tableTopParams.Length.Min);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что свойство Width возвращает корректный объект параметра ширины")]
         public void GetWidth_ShouldReturnWidthParameter()
         {
@@ -97,8 +93,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(1000, _tableTopParams.Width.Min);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что свойство Height возвращает корректный объект параметра высоты")]
         public void GetHeight_ShouldReturnHeightParameter()
         {
@@ -107,8 +103,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(15, _tableTopParams.Height.Min);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что свойство CornerRadius возвращает корректный объект параметра радиуса скругления углов")]
         public void GetCornerRadius_ShouldReturnCornerRadiusParameter()
         {
@@ -117,8 +113,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(0, _tableTopParams.CornerRadius.Min);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что свойство ChamferRadius возвращает корректный объект параметра радиуса фаски")]
         public void GetChamferRadius_ShouldReturnChamferRadiusParameter()
         {
@@ -127,8 +123,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(0, _tableTopParams.ChamferRadius.Min);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что множественные изменения параметров корректно обновляют зависимые параметры")]
         public void MultipleParameterChanges_ShouldProperlyUpdateDependentParameters()
         {
@@ -144,8 +140,8 @@ namespace Table_Top_Plugin.Tests.Models
             Assert.AreEqual(5, _tableTopParams.ChamferRadius.Value);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что после конструктора все обработчики событий корректно подключены")]
         public void EventHandlers_ShouldBeConnectedAfterConstructor()
         {
@@ -154,7 +150,6 @@ namespace Table_Top_Plugin.Tests.Models
             bool widthEventRaised = false;
             bool heightEventRaised = false;
 
-            //TODO: RSDN
             _tableTopParams.Length.ParameterChanged += (s, e) =>
             lengthEventRaised = true;
             _tableTopParams.Width.ParameterChanged += (s, e) =>

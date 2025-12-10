@@ -2,14 +2,13 @@
 
 namespace Table_Top_PluginTests.ModelsTests
 {
-    //TODO: XML +
     /// <summary>
     /// Содержит модульные тесты для класса <see cref="Parameter"/>
     /// </summary>
     public class ParameterTests
     {
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что конструктор правильно инициализирует параметр с заданными границами")]
         public void Constructor_ShouldInitializeWithCorrectBoundaries()
         {
@@ -20,8 +19,8 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.AreEqual(0.0, parameter.Value);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что конструктор автоматически меняет местами минимальное и максимальное значения, когда минимальное значение больше максимального")]
         public void Constructor_WhenMinGreaterThanMax_ShouldSwapValues()
         {
@@ -31,8 +30,8 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.AreEqual(30.0, parameter.Max);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что установка значения в допустимом диапазоне корректно обновляет значение и вызывает событие изменения параметра")]
         public void SetValue_WithinRange_ShouldUpdateValue()
         {
@@ -46,7 +45,6 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.IsTrue(eventRaised);
         }
 
-        //TODO: description +
         [Test]
         [Description("Проверяет, что установка значения ниже минимального не изменяет текущее значение и не вызывает событие изменения параметра")]
         public void SetValue_BelowMin_ShouldNotUpdateValue()
@@ -62,8 +60,8 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.IsFalse(eventRaised);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что установка значения выше максимального не изменяет текущее значение и не вызывает событие изменения параметра")]
         public void SetValue_AboveMax_ShouldNotUpdateValue()
         {
@@ -78,8 +76,8 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.IsFalse(eventRaised);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что метод SetBoundaries корректно обновляет границы значений и вызывает событие изменения параметра")]
         public void SetBoundaries_ShouldUpdateMinMax()
         {
@@ -94,8 +92,8 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.IsTrue(eventRaised);
         }
 
-        //TODO: description +
         [Test]
+        //TODO: RSDN
         [Description("Проверяет, что метод SetBoundaries автоматически меняет местами значения, когда минимальное значение больше максимального")]
         public void SetBoundaries_WhenMinGreaterThanMax_ShouldSwapValues()
         {
@@ -107,7 +105,6 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.AreEqual(40.0, parameter.Max);
         }
 
-        //TODO: description +
         [Test]
         [Description("Проверяет, что свойство Min возвращает корректное минимальное значение")]
         public void GetMin_ShouldReturnMinimumValue()
@@ -117,7 +114,6 @@ namespace Table_Top_PluginTests.ModelsTests
             Assert.AreEqual(5.0, parameter.Min);
         }
 
-        //TODO: description +
         [Test]
         [Description("Проверяет, что свойство Max возвращает корректное максимальное значение")]
         public void GetMax_ShouldReturnMaximumValue()

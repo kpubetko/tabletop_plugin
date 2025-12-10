@@ -8,6 +8,7 @@ namespace TableTopPluginUI.UI.UserControls
     /// </summary>
     public partial class ParameterItem : UserControl
     {
+        //TODO: XML
         private Parameter _parameter;
         private string _unit = "мм";
         private bool _isItCorrect = false;
@@ -75,6 +76,7 @@ namespace TableTopPluginUI.UI.UserControls
                 ToString() + " " + _unit;
         }
 
+        //TODO: RSDN
         private void textBox_Value_Validating(object sender, CancelEventArgs e)
         {
             if (!double.TryParse(textBox_Value.Text, out double value))
@@ -88,7 +90,7 @@ namespace TableTopPluginUI.UI.UserControls
         {
             if (!double.TryParse(textBox_Value.Text, out double value))
             {
-
+                //TODO: refactor
             }
             else
             {

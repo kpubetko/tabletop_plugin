@@ -9,8 +9,10 @@ namespace TableTopPluginUI.UI
     /// </summary>
     public partial class MainForm : Form
     {
+        //TODO: XML
         private readonly TableTopParameters _parameters =
             new TableTopParameters();
+        //TODO: XML
         private TableTopBuilder _builder = new TableTopBuilder();
 
         /// <summary>

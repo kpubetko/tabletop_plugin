@@ -10,12 +10,12 @@ namespace TableTopPlugin.Services
     /// </summary>
     public class TableTopBuilder
     {
-        //TODO: XML +
         /// <summary>
         /// Коннектор для подключения к КОМПАС-3D
         /// </summary>
         private KompasConnector _kompas = new KompasConnector();
 
+        //TODO: XML
         private ksDocument3D _document3D;
         private ksPart _part;
         private ksEntity _sketch;
@@ -26,7 +26,6 @@ namespace TableTopPlugin.Services
         /// <param name="tableTopParameters">Параметры столешницы</param>
         public void Build(TableTopParameters tableTopParameters)
         {
-            //TODO: refactor +
             if (!_kompas.IsConnected)
             {
                 _kompas.Connect();
