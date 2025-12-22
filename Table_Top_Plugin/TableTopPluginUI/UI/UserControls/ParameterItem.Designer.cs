@@ -81,6 +81,7 @@
             label_Bounds.Size = new Size(94, 32);
             label_Bounds.TabIndex = 2;
             label_Bounds.Text = "Bounds";
+            label_Bounds.TextChanged += label_Bounds_TextChanged;
             // 
             // ParameterItem
             // 

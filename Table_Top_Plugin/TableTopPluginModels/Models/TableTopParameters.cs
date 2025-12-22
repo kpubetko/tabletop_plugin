@@ -81,8 +81,7 @@
             }
 
             _parameters[ParametersList.WaveAmplitude].SetBoundaries(
-                0,
-                minSize / 3);
+                0, minSize / 3);
         }
 
         /// <summary>

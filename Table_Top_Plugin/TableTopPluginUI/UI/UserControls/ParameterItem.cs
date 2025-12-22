@@ -122,8 +122,6 @@ namespace TableTopPluginUI.UI.UserControls
         {
             if (!double.TryParse(textBox_Value.Text, out double parsedValue))
             {
-                // Некорректное значение — оставляем обработку подсветки/подсказок на дальнейшую логику,
-                // при необходимости можно дополнительно обрабатывать этот случай.
                 _isItCorrect = false;
                 textBox_Value.BackColor = Color.Pink;
                 return;
@@ -131,6 +129,36 @@ namespace TableTopPluginUI.UI.UserControls
 
             _parameter.Value = parsedValue;
 
+            if (parsedValue < _parameter.Min || parsedValue > _parameter.Max)
+            {
+                string message;
+                if (parsedValue < _parameter.Min)
+                {
+                    message = "Значение должно быть не меньше " +
+                        _parameter.Min.ToString();
+                    _toolTip.Show(message, textBox_Value);
+                }
+                else
+                {
+                    message = "Значение должно быть не больше " +
+                        _parameter.Max.ToString();
+                    _toolTip.Show(message, textBox_Value);
+                }
+
+                textBox_Value.BackColor = Color.Pink;
+                _isItCorrect = false;
+            }
+            else
+            {
+                textBox_Value.BackColor = SystemColors.Control;
+                _toolTip.Show("", textBox_Value);
+                _isItCorrect = true;
+            }
+        }
+
+        private void label_Bounds_TextChanged(object sender, EventArgs e)
+        {
+            double.TryParse(textBox_Value.Text, out double parsedValue);
             if (parsedValue < _parameter.Min || parsedValue > _parameter.Max)
             {
                 string message;
