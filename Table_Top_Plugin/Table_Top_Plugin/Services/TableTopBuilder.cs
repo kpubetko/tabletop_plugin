@@ -8,17 +8,44 @@ namespace TableTopPlugin.Services
     /// <summary>
     /// Построитель столешницы в КОМПАС-3D
     /// </summary>
-    public class TableTopBuilder
+    public class TableTopBuilder : ITableTopBuilder
     {
         /// <summary>
         /// Коннектор для подключения к КОМПАС-3D
         /// </summary>
-        private KompasConnector _kompas = new KompasConnector();
+        private KompasConnector _kompas;
 
-        //TODO: XML
+        /// <summary>
+        /// 3D-документ КОМПАС
+        /// </summary>
         private ksDocument3D _document3D;
+
+        /// <summary>
+        /// Деталь в 3D-документе
+        /// </summary>
         private ksPart _part;
+
+        /// <summary>
+        /// Эскиз для построения
+        /// </summary>
         private ksEntity _sketch;
+
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TableTopBuilder"/>
+        /// </summary>
+        public TableTopBuilder()
+        {
+            _kompas = new KompasConnector();
+        }
+
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TableTopBuilder"/> с указанным коннектором
+        /// </summary>
+        /// <param name="connector">Коннектор для подключения к КОМПАС-3D</param>
+        public TableTopBuilder(KompasConnector connector)
+        {
+            _kompas = connector;
+        }
 
         /// <summary>
         /// Построение столешницы
@@ -40,10 +67,11 @@ namespace TableTopPlugin.Services
             double height = tableTopParameters.Height.Value;
             double cornerRadius = tableTopParameters.CornerRadius.Value;
             double chamferRadius = tableTopParameters.ChamferRadius.Value;
+            double waveAmplitude = tableTopParameters.WaveAmplitude.Value;
 
             CreateDocumentAndPart();
             CreateSketch();
-            DrawSketchGeometry(length, width, cornerRadius);
+            DrawSketchGeometry(length, width, cornerRadius, waveAmplitude);
             ExtrudeSketch(height);
 
             if (chamferRadius > 0)
@@ -79,27 +107,37 @@ namespace TableTopPlugin.Services
         }
 
         /// <summary>
-        /// Рисует геометрию эскиза (прямоугольник или скругленный прямоугольник)
+        /// Рисует геометрию эскиза (прямоугольник, скругленный прямоугольник или прямоугольник с волнами)
         /// </summary>
         /// <param name="length">Длина столешницы</param>
         /// <param name="width">Ширина столешницы</param>
         /// <param name="cornerRadius">Радиус скругления углов</param>
+        /// <param name="waveAmplitude">Амплитуда волны по периметру</param>
+        /// <remarks>
+        /// При наличии амплитуды волны (больше 0) строится волнообразный периметр с учетом скругления углов.
+        /// При отсутствии волны строится обычный прямоугольник или скругленный прямоугольник
+        /// </remarks>
         private void DrawSketchGeometry(double length, double width,
-            double cornerRadius)
+            double cornerRadius, double waveAmplitude)
         {
             ksSketchDefinition sketchDefinition =
                 (ksSketchDefinition)_sketch.GetDefinition();
             ksDocument2D document2D =
                 (ksDocument2D)sketchDefinition.BeginEdit();
 
-            if (cornerRadius <= 0)
+            if (waveAmplitude > 0)
             {
-                DrawRectangle(document2D, length, width);
+                DrawWavyRectangle(document2D, length, width, 
+                    waveAmplitude, cornerRadius);
             }
-            else
+            else if (cornerRadius > 0)
             {
                 DrawRoundedRectangle(document2D, length, width,
                     cornerRadius);
+            }
+            else
+            {
+                DrawRectangle(document2D, length, width);
             }
 
             sketchDefinition.EndEdit();
@@ -139,7 +177,6 @@ namespace TableTopPlugin.Services
             double lengthX = length / 2 - cornerRadius;
             double lengthY = width / 2 - cornerRadius;
 
-            // Рисуем прямые участки
             document2D.ksLineSeg(-lengthX, width / 2, lengthX, width / 2, 1);
             document2D.ksLineSeg(length / 2, lengthY, length / 2,
                 -lengthY, 1);
@@ -148,7 +185,6 @@ namespace TableTopPlugin.Services
             document2D.ksLineSeg(-length / 2, -lengthY, -length / 2,
                 lengthY, 1);
 
-            // Рисуем скругления в углах
             document2D.ksArcByAngle(lengthX, lengthY, cornerRadius, 0,
                 90, 1, 1);
             document2D.ksArcByAngle(lengthX, -lengthY, cornerRadius, -90,
@@ -160,12 +196,134 @@ namespace TableTopPlugin.Services
         }
 
         /// <summary>
+        /// Рисует прямоугольник с волнообразным периметром в эскизе
+        /// </summary>
+        /// <param name="document2D">2D-документ эскиза</param>
+        /// <param name="length">Длина прямоугольника</param>
+        /// <param name="width">Ширина прямоугольника</param>
+        /// <param name="waveAmplitude">Амплитуда волны</param>
+        /// <param name="cornerRadius">Радиус скругления углов</param>
+        /// <remarks>
+        /// Создает волнообразный периметр с учетом скругления углов если cornerRadius больше 0
+        /// </remarks>
+        private void DrawWavyRectangle(ksDocument2D document2D,
+            double length, double width, double waveAmplitude, 
+            double cornerRadius)
+        {
+            int segmentsPerSide = 20;
+
+            if (cornerRadius > 0)
+            {
+                double lengthX = length / 2 - cornerRadius;
+                double lengthY = width / 2 - cornerRadius;
+
+                DrawWavySide(document2D, -lengthX, width / 2,
+                    lengthX, width / 2, waveAmplitude,
+                    segmentsPerSide, false);
+
+                document2D.ksArcByAngle(lengthX, lengthY, cornerRadius, 0,
+                    90, 1, 1);
+
+                DrawWavySide(document2D, length / 2, lengthY,
+                    length / 2, -lengthY, waveAmplitude, 
+                    segmentsPerSide, true);
+
+                document2D.ksArcByAngle(lengthX, -lengthY, cornerRadius, -90,
+                    0, 1, 1);
+
+                DrawWavySide(document2D, lengthX, -width / 2,
+                    -lengthX, -width / 2, waveAmplitude,
+                    segmentsPerSide, false);
+
+                document2D.ksArcByAngle(-lengthX, -lengthY, cornerRadius, 
+                    -180, -90, 1, 1);
+
+                DrawWavySide(document2D, -length / 2, -lengthY,
+                    -length / 2, lengthY, waveAmplitude, 
+                    segmentsPerSide, true);
+
+                document2D.ksArcByAngle(-lengthX, lengthY, cornerRadius, 90,
+                    180, 1, 1);
+            }
+            else
+            {
+                DrawWavySide(document2D, -length / 2, width / 2,
+                    length / 2, width / 2, waveAmplitude,
+                    segmentsPerSide, false);
+
+                DrawWavySide(document2D, length / 2, width / 2,
+                    length / 2, -width / 2, waveAmplitude,
+                    segmentsPerSide, true);
+
+                DrawWavySide(document2D, length / 2, -width / 2,
+                    -length / 2, -width / 2, waveAmplitude,
+                    segmentsPerSide, false);
+
+                DrawWavySide(document2D, -length / 2, -width / 2,
+                    -length / 2, width / 2, waveAmplitude, 
+                    segmentsPerSide, true);
+            }
+        }
+
+        /// <summary>
+        /// Рисует одну сторону с волнообразным профилем
+        /// </summary>
+        /// <param name="document2D">2D-документ эскиза</param>
+        /// <param name="x1">Координата X начальной точки</param>
+        /// <param name="y1">Координата Y начальной точки</param>
+        /// <param name="x2">Координата X конечной точки</param>
+        /// <param name="y2">Координата Y конечной точки</param>
+        /// <param name="amplitude">Амплитуда волны</param>
+        /// <param name="segments">Количество сегментов</param>
+        /// <param name="isVertical">Флаг вертикальной стороны</param>
+        private void DrawWavySide(ksDocument2D document2D,
+            double x1, double y1, double x2, double y2,
+            double amplitude, int segments, bool isVertical)
+        {
+            double length = Math.Sqrt((x2 - x1) * (x2 - x1)
+                + (y2 - y1) * (y2 - y1));
+            double dx = (x2 - x1) / segments;
+            double dy = (y2 - y1) / segments;
+
+            double normalX, normalY;
+            if (isVertical)
+            {
+                normalX = dy / length * length;
+                normalY = -dx / length * length;
+            }
+            else
+            {
+                normalX = -dy / length * length;
+                normalY = dx / length * length;
+            }
+
+            double prevX = x1;
+            double prevY = y1;
+
+            for (int i = 1; i <= segments; i++)
+            {
+                double t = (double)i / segments;
+                double baseX = x1 + dx * i;
+                double baseY = y1 + dy * i;
+
+                double wave = amplitude * Math.Sin(t * Math.PI * 4);
+                double currentX = baseX + normalX * wave / length;
+                double currentY = baseY + normalY * wave / length;
+
+                document2D.ksLineSeg(prevX, prevY, currentX, currentY, 1);
+
+                prevX = currentX;
+                prevY = currentY;
+            }
+        }
+
+        /// <summary>
         /// Выполняет операцию выдавливания эскиза
         /// </summary>
         /// <param name="height">Высота выдавливания</param>
         private void ExtrudeSketch(double height)
         {
-            ksEntity extrusion = 
+            ksEntity extrusion =
                 (ksEntity)_part.NewEntity((int)Obj3dType.o3d_baseExtrusion);
             ksBaseExtrusionDefinition extrusionDefinition =
                 (ksBaseExtrusionDefinition)extrusion.GetDefinition();

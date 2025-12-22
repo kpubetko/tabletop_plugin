@@ -5,7 +5,7 @@ namespace TableTopPlugin.Services
     /// <summary>
     /// Коннектор для подключения к КОМПАС-3D
     /// </summary>
-    public class KompasConnector
+    public class KompasConnector : IKompasConnector
     {
         /// <summary>
         /// Объект КОМПАС-3D
@@ -15,7 +15,7 @@ namespace TableTopPlugin.Services
         /// <summary>
         /// Флаг подключения к КОМПАС-3D
         /// </summary>
-        public bool IsConnected = false;
+        public bool IsConnected { get; private set; } = false;
 
         /// <summary>
         /// Подключение к КОМПАС-3D

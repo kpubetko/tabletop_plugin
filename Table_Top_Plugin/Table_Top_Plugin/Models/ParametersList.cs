@@ -28,6 +28,11 @@
         /// <summary>
         /// Радиус фаски
         /// </summary>
-        ChamferRadius
+        ChamferRadius,
+
+        /// <summary>
+        /// Амплитуда волны по периметру
+        /// </summary>
+        WaveAmplitude
     }
 }

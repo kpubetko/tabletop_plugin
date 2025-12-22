@@ -5,13 +5,19 @@
     /// </summary>
     public class Parameter
     {
-        //TODO: XML
+        /// <summary>
+        /// Текущее значение параметра
+        /// </summary>
         private double _value;
 
-        //TODO: XML
+        /// <summary>
+        /// Минимально допустимое значение параметра
+        /// </summary>
         private double _minValue;
 
-        //TODO: XML
+        /// <summary>
+        /// Максимально допустимое значение параметра
+        /// </summary>
         private double _maxValue;
 
         /// <summary>

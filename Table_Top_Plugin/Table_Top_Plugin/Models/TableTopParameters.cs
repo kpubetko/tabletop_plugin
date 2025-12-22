@@ -5,6 +5,9 @@
     /// </summary>
     public class TableTopParameters
     {
+        /// <summary>
+        /// Словарь параметров столешницы
+        /// </summary>
         private Dictionary<ParametersList, Parameter> _parameters;
 
         /// <summary>
@@ -17,6 +20,7 @@
         /// - Высота: от 15 до 50 мм
         /// - Радиус скругления углов: от 0 до 0 мм (неактивно до установки размеров)
         /// - Радиус фаски: от 0 до 0 мм (неактивно до установки высоты)
+        /// - Амплитуда волны: от 0 до 0 мм (неактивно до установки размеров)
         /// </remarks>
         public TableTopParameters()
         {
@@ -26,7 +30,8 @@
                 { ParametersList.Width, new Parameter(1000, 2500) },
                 { ParametersList.Height, new Parameter(15, 50) },
                 { ParametersList.CornerRadius, new Parameter(0, 0) },
-                { ParametersList.ChamferRadius, new Parameter(0, 0) }
+                { ParametersList.ChamferRadius, new Parameter(0, 0) },
+                { ParametersList.WaveAmplitude, new Parameter(0, 0) }
             };
             _parameters[ParametersList.Length].ParameterChanged
                 += LengthOrWidthChanged;
@@ -34,6 +39,8 @@
                 += LengthOrWidthChanged;
             _parameters[ParametersList.Height].ParameterChanged
                 += HeightChanged;
+            _parameters[ParametersList.WaveAmplitude].ParameterChanged
+                += WaveAmplitudeChanged;
         }
 
         /// <summary>
@@ -43,23 +50,39 @@
         /// <param name="e">Данные события</param>
         /// <remarks>
         /// Автоматически обновляет максимальное значение радиуса скругления углов
-        /// в зависимости от меньшего из размеров (длины или ширины)
+        /// в зависимости от меньшего из размеров (длины или ширины).
+        /// Если волна включена (амплитуда больше 0), максимум радиуса ограничивается 1/4 от размера,
+        /// иначе 1/2 от размера.
+        /// Также обновляет максимальную амплитуду волны (не более 1/3 от меньшего размера)
         /// </remarks>
         private void LengthOrWidthChanged(object sender, EventArgs e)
         {
+            double minSize = Math.Min(
+                _parameters[ParametersList.Length].Value,
+                _parameters[ParametersList.Width].Value);
+
+            double cornerRadiusDivisor = 
+                _parameters[ParametersList.WaveAmplitude].Value > 0 ? 4 : 2;
+
             if (_parameters[ParametersList.Length].Value <
                 _parameters[ParametersList.Width].Value)
             {
                 _parameters[ParametersList.CornerRadius].SetBoundaries(
                     _parameters[ParametersList.CornerRadius].Min,
-                    _parameters[ParametersList.Length].Value / 2);
+                    _parameters[ParametersList.Length].Value / 
+                    cornerRadiusDivisor);
             }
             else
             {
                 _parameters[ParametersList.CornerRadius].SetBoundaries(
                     _parameters[ParametersList.CornerRadius].Min,
-                    _parameters[ParametersList.Width].Value / 2);
+                    _parameters[ParametersList.Width].Value / 
+                    cornerRadiusDivisor);
             }
+
+            _parameters[ParametersList.WaveAmplitude].SetBoundaries(
+                0,
+                minSize / 3);
         }
 
         /// <summary>
@@ -76,6 +99,30 @@
             _parameters[ParametersList.ChamferRadius].SetBoundaries(
                 _parameters[ParametersList.ChamferRadius].Min,
                 _parameters[ParametersList.Height].Value / 2);
+        }
+
+        /// <summary>
+        /// Обработчик изменения амплитуды волны
+        /// </summary>
+        /// <param name="sender">Источник события</param>
+        /// <param name="e">Данные события</param>
+        /// <remarks>
+        /// При изменении амплитуды волны обновляет максимальное значение радиуса скругления углов.
+        /// Если волна включена (амплитуда больше 0), максимум ограничивается 1/4 от меньшего размера,
+        /// иначе 1/2 от меньшего размера
+        /// </remarks>
+        private void WaveAmplitudeChanged(object sender, EventArgs e)
+        {
+            double minSize = Math.Min(
+                _parameters[ParametersList.Length].Value,
+                _parameters[ParametersList.Width].Value);
+
+            double cornerRadiusDivisor = 
+                _parameters[ParametersList.WaveAmplitude].Value > 0 ? 4 : 2;
+
+            _parameters[ParametersList.CornerRadius].SetBoundaries(
+                _parameters[ParametersList.CornerRadius].Min,
+                minSize / cornerRadiusDivisor);
         }
 
         /// <summary>
@@ -115,7 +162,9 @@
         /// Получает параметр радиуса скругления углов
         /// </summary>
         /// <remarks>
-        /// Максимальное значение автоматически ограничивается половиной меньшего размера (длины или ширины)
+        /// Максимальное значение автоматически ограничивается в зависимости от наличия волны:
+        /// - Если волна отключена (амплитуда = 0): максимум = 1/2 от меньшего размера
+        /// - Если волна включена (амплитуда больше 0): максимум = 1/4 от меньшего размера
         /// </remarks>
         public Parameter CornerRadius
         {
@@ -136,6 +185,21 @@
             get
             {
                 return _parameters[ParametersList.ChamferRadius];
+            }
+        }
+
+        /// <summary>
+        /// Получает параметр амплитуды волны по периметру
+        /// </summary>
+        /// <remarks>
+        /// Максимальное значение автоматически ограничивается 1/3 от меньшего размера (длины или ширины).
+        /// При значении 0 строится прямоугольник без волн
+        /// </remarks>
+        public Parameter WaveAmplitude
+        {
+            get
+            {
+                return _parameters[ParametersList.WaveAmplitude];
             }
         }
     }
