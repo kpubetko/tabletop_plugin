@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TableTopPlugin.Models;
+﻿using TableTopPluginModels.Models;
 using TableTopPlugin.Services;
 using TableTopPluginUI.UI.UserControls;
 

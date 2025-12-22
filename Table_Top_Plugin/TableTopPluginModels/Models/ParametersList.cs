@@ -1,4 +1,4 @@
-﻿namespace TableTopPlugin.Models
+﻿namespace TableTopPluginModels.Models
 {
     /// <summary>
     /// Перечисление параметров столешницы

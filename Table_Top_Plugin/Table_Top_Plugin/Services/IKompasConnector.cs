@@ -1,6 +1,4 @@
-﻿using TableTopPlugin.Models;
-
-namespace TableTopPlugin.Services
+﻿namespace TableTopPlugin.Services
 {
     /// <summary>
     /// Интерфейс коннектора для подключения к КОМПАС-3D

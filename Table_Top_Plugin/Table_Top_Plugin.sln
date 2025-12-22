@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36717.8 d17.14
+VisualStudioVersion = 17.14.36717.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTopPlugin", "Table_Top_Plugin\TableTopPlugin.csproj", "{728E4B20-B39E-416F-A230-663D8004AD23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTopPluginTests", "TableTopPluginTests\TableTopPluginTests.csproj", "{24337199-3138-47DC-AF5D-DBAEE8E4D3F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTopPluginUI", "TableTopPluginUI\TableTopPluginUI.csproj", "{443333A4-52AA-461B-B96F-36D2F2126A6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTopPluginModels", "TableTopPluginModels\TableTopPluginModels.csproj", "{EC0877A7-0BE1-4D51-9185-9DB678D74978}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{443333A4-52AA-461B-B96F-36D2F2126A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{443333A4-52AA-461B-B96F-36D2F2126A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{443333A4-52AA-461B-B96F-36D2F2126A6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC0877A7-0BE1-4D51-9185-9DB678D74978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC0877A7-0BE1-4D51-9185-9DB678D74978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC0877A7-0BE1-4D51-9185-9DB678D74978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC0877A7-0BE1-4D51-9185-9DB678D74978}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

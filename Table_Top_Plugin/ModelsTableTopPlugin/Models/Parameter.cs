@@ -1,4 +1,4 @@
-﻿namespace TableTopPlugin.Models
+﻿namespace ModelsTableTopPlugin.Models
 {
     /// <summary>
     /// Представляет параметр с ограниченным диапазоном значений

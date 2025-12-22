@@ -1,4 +1,4 @@
-﻿using TableTopPlugin.Models;
+﻿using TableTopPluginModels.Models;
 
 namespace TableTopPlugin.Services
 {

@@ -1,4 +1,4 @@
-﻿using TableTopPlugin.Models;
+﻿using TableTopPluginModels.Models;
 
 namespace Table_Top_PluginTests.ModelsTests
 {

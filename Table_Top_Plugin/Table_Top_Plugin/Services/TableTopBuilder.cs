@@ -1,7 +1,7 @@
 ﻿using Kompas6API5;
 using Kompas6Constants;
 using Kompas6Constants3D;
-using TableTopPlugin.Models;
+using TableTopPluginModels.Models;
 
 namespace TableTopPlugin.Services
 {

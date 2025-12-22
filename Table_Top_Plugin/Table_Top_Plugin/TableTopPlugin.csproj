@@ -48,4 +48,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TableTopPluginModels\TableTopPluginModels.csproj" />
+  </ItemGroup>
+
 </Project>

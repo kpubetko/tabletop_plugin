@@ -34,7 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Table_Top_Plugin\TableTopPlugin.csproj" />
+	  <ProjectReference Include="..\TableTopPluginModels\TableTopPluginModels.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
