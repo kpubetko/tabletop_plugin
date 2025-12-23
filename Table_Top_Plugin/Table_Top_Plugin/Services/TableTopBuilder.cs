@@ -8,7 +8,7 @@ namespace TableTopPlugin.Services
     /// <summary>
     /// Построитель столешницы в КОМПАС-3D
     /// </summary>
-    public class TableTopBuilder : ITableTopBuilder
+    public class TableTopBuilder
     {
         /// <summary>
         /// Коннектор для подключения к КОМПАС-3D

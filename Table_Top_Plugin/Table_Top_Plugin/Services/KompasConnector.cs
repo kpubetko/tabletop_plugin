@@ -5,7 +5,7 @@ namespace TableTopPlugin.Services
     /// <summary>
     /// Коннектор для подключения к КОМПАС-3D
     /// </summary>
-    public class KompasConnector : IKompasConnector
+    public class KompasConnector
     {
         /// <summary>
         /// Объект КОМПАС-3D
