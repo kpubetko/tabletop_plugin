@@ -8,7 +8,6 @@ namespace Table_Top_PluginTests.ModelsTests
     public class ParameterTests
     {
         [Test]
-        //TODO: RSDN+
         [Description("Проверяет, что конструктор правильно инициализирует" +
             " параметр с заданными границами")]
         public void Constructor_ShouldInitializeWithCorrectBoundaries()
@@ -21,7 +20,6 @@ namespace Table_Top_PluginTests.ModelsTests
         }
 
         [Test]
-        //TODO: RSDN+
         [Description("Проверяет, что конструктор автоматически меняет местами" +
             " минимальное и максимальное значения, когда минимальное значение" +
             " больше максимального")]
@@ -34,7 +32,6 @@ namespace Table_Top_PluginTests.ModelsTests
         }
 
         [Test]
-        //TODO: RSDN+
         [Description("Проверяет, что установка значения в допустимом " +
             "диапазоне корректно обновляет значение и вызывает событие" +
             " изменения параметра")]
@@ -68,7 +65,6 @@ namespace Table_Top_PluginTests.ModelsTests
         }
 
         [Test]
-        //TODO: RSDN+
         [Description("Проверяет, что установка значения выше максимального " +
             "не изменяет текущее значение и не вызывает событие изменения " +
             "параметра")]
@@ -86,7 +82,6 @@ namespace Table_Top_PluginTests.ModelsTests
         }
 
         [Test]
-        //TODO: RSDN+
         [Description("Проверяет, что метод SetBoundaries корректно обновляет" +
             " границы значений и вызывает событие изменения параметра")]
         public void SetBoundaries_ShouldUpdateMinMax()
@@ -103,7 +98,6 @@ namespace Table_Top_PluginTests.ModelsTests
         }
 
         [Test]
-        //TODO: RSDN +
         [Description("Проверяет, что метод SetBoundaries автоматически " +
             "меняет местами значения, когда минимальное значение больше" +
             " максимального")]
