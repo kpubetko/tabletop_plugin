@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTopPluginUI", "TableTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTopPluginModels", "TableTopPluginModels\TableTopPluginModels.csproj", "{EC0877A7-0BE1-4D51-9185-9DB678D74978}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StressTesting", "StressTesting\StressTesting.csproj", "{63F2220C-0378-4276-B874-7272DF7892CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EC0877A7-0BE1-4D51-9185-9DB678D74978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC0877A7-0BE1-4D51-9185-9DB678D74978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC0877A7-0BE1-4D51-9185-9DB678D74978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63F2220C-0378-4276-B874-7272DF7892CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F2220C-0378-4276-B874-7272DF7892CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F2220C-0378-4276-B874-7272DF7892CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F2220C-0378-4276-B874-7272DF7892CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

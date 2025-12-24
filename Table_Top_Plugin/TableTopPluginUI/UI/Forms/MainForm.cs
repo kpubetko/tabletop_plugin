@@ -4,13 +4,23 @@ using TableTopPluginUI.UI.UserControls;
 
 namespace TableTopPluginUI.UI
 {
-    //TODO: RSDN
+    //TODO: RSDN+
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Объект класса TableTopParameters для храения параметров
+        /// </summary>
         private readonly TableTopParameters _parameters 
             = new TableTopParameters();
+
+        /// <summary>
+        /// Объект класса TableTopBuilder для построения объекта
+        /// </summary>
         private TableTopBuilder _builder = new TableTopBuilder();
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="MainForm"/>.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -47,6 +57,9 @@ namespace TableTopPluginUI.UI
 
         }
 
+        /// <summary>
+        /// Проверка полей параметров, отвечающих за корректность параметра
+        /// </summary>
         private bool CheckValues()
         {
             foreach (Control c in tableLayoutPanel1.Controls)
@@ -57,6 +70,11 @@ namespace TableTopPluginUI.UI
             return true;
         }
 
+        /// <summary>
+        /// Запускает процесс построения модели
+        /// </summary>
+        /// <param name="sender">Источник события (не используется).</param>
+        /// <param name="e">Данные события (не используются).</param>
         private async void button_Build_Click(object sender, EventArgs e)
         {
             if (CheckValues())

@@ -156,7 +156,15 @@ namespace TableTopPluginUI.UI.UserControls
             }
         }
 
-        //TODO: RSDN
+        //TODO: RSDN +
+        /// <summary>
+        /// Обработчик изменения текста в поле границ параметра.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Данные события.</param>
+        /// <remarks>
+        /// Выполняет проверку значения на совпадение границам
+        /// </remarks>
         private void label_Bounds_TextChanged(object sender, EventArgs e)
         {
             double.TryParse(textBox_Value.Text, out double parsedValue);
