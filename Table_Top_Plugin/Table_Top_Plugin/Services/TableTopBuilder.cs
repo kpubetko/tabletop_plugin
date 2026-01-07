@@ -83,6 +83,20 @@ namespace TableTopPlugin.Services
         }
 
         /// <summary>
+        /// Закрывает текущий открытый документ КОМПАС без сохранения
+        /// </summary>
+        public void CloseDocument()
+        {
+            if (_document3D != null)
+            {
+                _document3D.close();
+                _document3D = null;
+                _part = null;
+                _sketch = null;
+            }
+        }
+
+        /// <summary>
         /// Создает новый 3D-документ и получает деталь
         /// </summary>
         private void CreateDocumentAndPart()
@@ -127,7 +141,7 @@ namespace TableTopPlugin.Services
 
             if (waveAmplitude > 0)
             {
-                DrawWavyRectangle(document2D, length, width, 
+                DrawWavyRectangle(document2D, length, width,
                     waveAmplitude, cornerRadius);
             }
             else if (cornerRadius > 0)
@@ -207,7 +221,7 @@ namespace TableTopPlugin.Services
         /// Создает волнообразный периметр с учетом скругления углов если cornerRadius больше 0
         /// </remarks>
         private void DrawWavyRectangle(ksDocument2D document2D,
-            double length, double width, double waveAmplitude, 
+            double length, double width, double waveAmplitude,
             double cornerRadius)
         {
             int segmentsPerSide = 20;
@@ -225,7 +239,7 @@ namespace TableTopPlugin.Services
                     90, 1, 1);
 
                 DrawWavySide(document2D, length / 2, lengthY,
-                    length / 2, -lengthY, waveAmplitude, 
+                    length / 2, -lengthY, waveAmplitude,
                     segmentsPerSide, true);
 
                 document2D.ksArcByAngle(lengthX, -lengthY, cornerRadius, -90,
@@ -235,11 +249,11 @@ namespace TableTopPlugin.Services
                     -lengthX, -width / 2, waveAmplitude,
                     segmentsPerSide, false);
 
-                document2D.ksArcByAngle(-lengthX, -lengthY, cornerRadius, 
+                document2D.ksArcByAngle(-lengthX, -lengthY, cornerRadius,
                     -180, -90, 1, 1);
 
                 DrawWavySide(document2D, -length / 2, -lengthY,
-                    -length / 2, lengthY, waveAmplitude, 
+                    -length / 2, lengthY, waveAmplitude,
                     segmentsPerSide, true);
 
                 document2D.ksArcByAngle(-lengthX, lengthY, cornerRadius, 90,
@@ -260,7 +274,7 @@ namespace TableTopPlugin.Services
                     segmentsPerSide, false);
 
                 DrawWavySide(document2D, -length / 2, -width / 2,
-                    -length / 2, width / 2, waveAmplitude, 
+                    -length / 2, width / 2, waveAmplitude,
                     segmentsPerSide, true);
             }
         }
