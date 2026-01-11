@@ -39,27 +39,15 @@ namespace TableTopPlugin.Services
         }
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="TableTopBuilder"/> с указанным коннектором
-        /// </summary>
-        /// <param name="connector">Коннектор для подключения к КОМПАС-3D</param>
-        public TableTopBuilder(KompasConnector connector)
-        {
-            _kompas = connector;
-        }
-
-        /// <summary>
         /// Построение столешницы
         /// </summary>
         /// <param name="tableTopParameters">Параметры столешницы</param>
         public void Build(TableTopParameters tableTopParameters)
         {
+            _kompas.Connect();
             if (!_kompas.IsConnected)
             {
-                _kompas.Connect();
-                if (!_kompas.IsConnected)
-                {
-                    return;
-                }
+                return;
             }
 
             double length = tableTopParameters.Length.Value;

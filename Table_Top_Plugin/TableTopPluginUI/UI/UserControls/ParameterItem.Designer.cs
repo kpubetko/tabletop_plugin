@@ -46,28 +46,31 @@
             tableLayoutPanel1.Controls.Add(label_Bounds, 2, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Margin = new Padding(2, 1, 2, 1);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(664, 52);
+            tableLayoutPanel1.Size = new Size(358, 24);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label_Name
             // 
             label_Name.Anchor = AnchorStyles.Left;
             label_Name.AutoSize = true;
-            label_Name.Location = new Point(3, 10);
+            label_Name.Location = new Point(2, 4);
+            label_Name.Margin = new Padding(2, 0, 2, 0);
             label_Name.Name = "label_Name";
-            label_Name.Size = new Size(78, 32);
+            label_Name.Size = new Size(39, 15);
             label_Name.TabIndex = 0;
             label_Name.Text = "Name";
             // 
             // textBox_Value
             // 
             textBox_Value.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox_Value.Location = new Point(169, 6);
+            textBox_Value.Location = new Point(91, 1);
+            textBox_Value.Margin = new Padding(2, 1, 2, 1);
             textBox_Value.Name = "textBox_Value";
-            textBox_Value.Size = new Size(326, 39);
+            textBox_Value.Size = new Size(175, 23);
             textBox_Value.TabIndex = 1;
             textBox_Value.TextChanged += textBox_Value_TextChanged;
             textBox_Value.Validating += textBox_Value_Validating;
@@ -76,20 +79,22 @@
             // 
             label_Bounds.Anchor = AnchorStyles.Left;
             label_Bounds.AutoSize = true;
-            label_Bounds.Location = new Point(501, 10);
+            label_Bounds.Location = new Point(270, 4);
+            label_Bounds.Margin = new Padding(2, 0, 2, 0);
             label_Bounds.Name = "label_Bounds";
-            label_Bounds.Size = new Size(94, 32);
+            label_Bounds.Size = new Size(47, 15);
             label_Bounds.TabIndex = 2;
             label_Bounds.Text = "Bounds";
             label_Bounds.TextChanged += label_Bounds_TextChanged;
             // 
             // ParameterItem
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tableLayoutPanel1);
+            Margin = new Padding(2, 1, 2, 1);
             Name = "ParameterItem";
-            Size = new Size(664, 52);
+            Size = new Size(358, 24);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);

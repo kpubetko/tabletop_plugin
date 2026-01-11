@@ -3,7 +3,7 @@
     /// <summary>
     /// Перечисление параметров столешницы
     /// </summary>
-    public enum ParametersList
+    public enum ParameterType
     {
         /// <summary>
         /// Длина столешницы

@@ -29,7 +29,18 @@ namespace TableTopPlugin.Services
         /// </remarks>
         public void Connect()
         {
-            if (IsConnected) return;
+            if (IsConnected)
+            {
+                try
+                {
+                    Kompas.Document3D();
+                    return;
+                }
+                catch
+                {
+                    Console.WriteLine("Перезапуск Kompas");
+                }
+            };
 
             try
             {

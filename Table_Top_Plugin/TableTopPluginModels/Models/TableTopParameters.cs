@@ -8,7 +8,7 @@
         /// <summary>
         /// Словарь параметров столешницы
         /// </summary>
-        private Dictionary<ParametersList, Parameter> _parameters;
+        private Dictionary<ParameterType, Parameter> _parameters;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="TableTopParameters"/> с параметрами по умолчанию
@@ -24,22 +24,22 @@
         /// </remarks>
         public TableTopParameters()
         {
-            _parameters = new Dictionary<ParametersList, Parameter>()
+            _parameters = new Dictionary<ParameterType, Parameter>()
             {
-                { ParametersList.Length, new Parameter(1000, 2500) },
-                { ParametersList.Width, new Parameter(1000, 2500) },
-                { ParametersList.Height, new Parameter(15, 50) },
-                { ParametersList.CornerRadius, new Parameter(0, 0) },
-                { ParametersList.ChamferRadius, new Parameter(0, 0) },
-                { ParametersList.WaveAmplitude, new Parameter(0, 0) }
+                { ParameterType.Length, new Parameter(1000, 2500) },
+                { ParameterType.Width, new Parameter(1000, 2500) },
+                { ParameterType.Height, new Parameter(15, 50) },
+                { ParameterType.CornerRadius, new Parameter(0, 0) },
+                { ParameterType.ChamferRadius, new Parameter(0, 0) },
+                { ParameterType.WaveAmplitude, new Parameter(0, 0) }
             };
-            _parameters[ParametersList.Length].ParameterChanged
+            _parameters[ParameterType.Length].ParameterChanged
                 += LengthOrWidthChanged;
-            _parameters[ParametersList.Width].ParameterChanged
+            _parameters[ParameterType.Width].ParameterChanged
                 += LengthOrWidthChanged;
-            _parameters[ParametersList.Height].ParameterChanged
+            _parameters[ParameterType.Height].ParameterChanged
                 += HeightChanged;
-            _parameters[ParametersList.WaveAmplitude].ParameterChanged
+            _parameters[ParameterType.WaveAmplitude].ParameterChanged
                 += WaveAmplitudeChanged;
         }
 
@@ -58,29 +58,29 @@
         private void LengthOrWidthChanged(object sender, EventArgs e)
         {
             double minSize = Math.Min(
-                _parameters[ParametersList.Length].Value,
-                _parameters[ParametersList.Width].Value);
+                _parameters[ParameterType.Length].Value,
+                _parameters[ParameterType.Width].Value);
 
             double cornerRadiusDivisor = 
-                _parameters[ParametersList.WaveAmplitude].Value > 0 ? 4 : 2;
+                _parameters[ParameterType.WaveAmplitude].Value > 0 ? 4 : 2;
 
-            if (_parameters[ParametersList.Length].Value <
-                _parameters[ParametersList.Width].Value)
+            if (_parameters[ParameterType.Length].Value <
+                _parameters[ParameterType.Width].Value)
             {
-                _parameters[ParametersList.CornerRadius].SetBoundaries(
-                    _parameters[ParametersList.CornerRadius].Min,
-                    _parameters[ParametersList.Length].Value / 
+                _parameters[ParameterType.CornerRadius].SetBoundaries(
+                    _parameters[ParameterType.CornerRadius].Min,
+                    _parameters[ParameterType.Length].Value / 
                     cornerRadiusDivisor);
             }
             else
             {
-                _parameters[ParametersList.CornerRadius].SetBoundaries(
-                    _parameters[ParametersList.CornerRadius].Min,
-                    _parameters[ParametersList.Width].Value / 
+                _parameters[ParameterType.CornerRadius].SetBoundaries(
+                    _parameters[ParameterType.CornerRadius].Min,
+                    _parameters[ParameterType.Width].Value / 
                     cornerRadiusDivisor);
             }
 
-            _parameters[ParametersList.WaveAmplitude].SetBoundaries(
+            _parameters[ParameterType.WaveAmplitude].SetBoundaries(
                 0, minSize / 3);
         }
 
@@ -95,9 +95,9 @@
         /// </remarks>
         public void HeightChanged(object sender, EventArgs e)
         {
-            _parameters[ParametersList.ChamferRadius].SetBoundaries(
-                _parameters[ParametersList.ChamferRadius].Min,
-                _parameters[ParametersList.Height].Value / 2);
+            _parameters[ParameterType.ChamferRadius].SetBoundaries(
+                _parameters[ParameterType.ChamferRadius].Min,
+                _parameters[ParameterType.Height].Value / 2);
         }
 
         /// <summary>
@@ -113,14 +113,14 @@
         private void WaveAmplitudeChanged(object sender, EventArgs e)
         {
             double minSize = Math.Min(
-                _parameters[ParametersList.Length].Value,
-                _parameters[ParametersList.Width].Value);
+                _parameters[ParameterType.Length].Value,
+                _parameters[ParameterType.Width].Value);
 
             double cornerRadiusDivisor = 
-                _parameters[ParametersList.WaveAmplitude].Value > 0 ? 4 : 2;
+                _parameters[ParameterType.WaveAmplitude].Value > 0 ? 4 : 2;
 
-            _parameters[ParametersList.CornerRadius].SetBoundaries(
-                _parameters[ParametersList.CornerRadius].Min,
+            _parameters[ParameterType.CornerRadius].SetBoundaries(
+                _parameters[ParameterType.CornerRadius].Min,
                 minSize / cornerRadiusDivisor);
         }
 
@@ -131,7 +131,7 @@
         {
             get
             {
-                return _parameters[ParametersList.Length];
+                return _parameters[ParameterType.Length];
             }
         }
 
@@ -142,7 +142,7 @@
         {
             get
             {
-                return _parameters[ParametersList.Width];
+                return _parameters[ParameterType.Width];
             }
         }
 
@@ -153,7 +153,7 @@
         {
             get
             {
-                return _parameters[ParametersList.Height];
+                return _parameters[ParameterType.Height];
             }
         }
 
@@ -169,7 +169,7 @@
         {
             get
             {
-                return _parameters[ParametersList.CornerRadius];
+                return _parameters[ParameterType.CornerRadius];
             }
         }
 
@@ -183,7 +183,7 @@
         {
             get
             {
-                return _parameters[ParametersList.ChamferRadius];
+                return _parameters[ParameterType.ChamferRadius];
             }
         }
 
@@ -198,7 +198,7 @@
         {
             get
             {
-                return _parameters[ParametersList.WaveAmplitude];
+                return _parameters[ParameterType.WaveAmplitude];
             }
         }
     }

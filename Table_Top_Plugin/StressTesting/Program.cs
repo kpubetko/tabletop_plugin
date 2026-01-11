@@ -13,7 +13,8 @@ namespace StressTesting
         /// <summary>
         /// Коэффициент преобразования байтов в гигабайты
         /// </summary>
-        private const double GigabyteInByte = 0.000000000931322574615478515625;
+        private const double GigabyteInByte = 
+            0.000000000931322574615478515625;
 
         /// <summary>
         /// Точка входа в программу
@@ -46,9 +47,11 @@ namespace StressTesting
             if (durationChoice == "1")
             {
                 Console.Write("\nEnter number of builds: ");
-                if (!int.TryParse(Console.ReadLine(), out int count) || count <= 0)
+                if (!int.TryParse(Console.ReadLine(), out int count)
+                    || count <= 0)
                 {
-                    Console.WriteLine("Invalid number! Using default value: 1000");
+                    Console.WriteLine("Invalid number! " +
+                        "Using default value: 1000");
                     buildCount = 1000;
                 }
                 else
@@ -59,9 +62,11 @@ namespace StressTesting
             else if (durationChoice == "2")
             {
                 Console.Write("\nEnter test duration (minutes): ");
-                if (!double.TryParse(Console.ReadLine(), out double minutes) || minutes <= 0)
+                if (!double.TryParse(Console.ReadLine(),
+                    out double minutes) || minutes <= 0)
                 {
-                    Console.WriteLine("Invalid duration! Using default value: 5 minutes");
+                    Console.WriteLine("Invalid duration! Using default" +
+                        " value: 5 minutes");
                     durationMinutes = 5;
                 }
                 else
@@ -71,25 +76,32 @@ namespace StressTesting
             }
             else
             {
-                Console.WriteLine("Invalid choice! Using iterations mode with 1000 builds");
+                Console.WriteLine("Invalid choice! Using" +
+                    " iterations mode with 1000 builds");
                 buildCount = 1000;
             }
 
             switch (choice)
             {
                 case "1":
-                    RunStressTest("minimal", GetMinimalParameters(), buildCount, durationMinutes);
+                    RunStressTest("minimal", GetMinimalParameters(),
+                        buildCount, durationMinutes);
                     break;
                 case "2":
-                    RunStressTest("average", GetAverageParameters(), buildCount, durationMinutes);
+                    RunStressTest("average", GetAverageParameters(),
+                        buildCount, durationMinutes);
                     break;
                 case "3":
-                    RunStressTest("maximal", GetMaximalParameters(), buildCount, durationMinutes);
+                    RunStressTest("maximal", GetMaximalParameters(),
+                        buildCount, durationMinutes);
                     break;
                 case "4":
-                    RunStressTest("minimal", GetMinimalParameters(), buildCount, durationMinutes);
-                    RunStressTest("average", GetAverageParameters(), buildCount, durationMinutes);
-                    RunStressTest("maximal", GetMaximalParameters(), buildCount, durationMinutes);
+                    RunStressTest("minimal", GetMinimalParameters(),
+                        buildCount, durationMinutes);
+                    RunStressTest("average", GetAverageParameters(),
+                        buildCount, durationMinutes);
+                    RunStressTest("maximal", GetMaximalParameters(),
+                        buildCount, durationMinutes);
                     break;
                 default:
                     Console.WriteLine("Invalid choice!");
@@ -109,7 +121,8 @@ namespace StressTesting
         /// <param name="parameters">Параметры столешницы</param>
         /// <param name="buildCount">Количество построений (если задано)</param>
         /// <param name="durationMinutes">Длительность теста в минутах (если задано)</param>
-        private static void RunStressTest(string testName, TableTopParameters parameters,
+        private static void RunStressTest(string testName,
+            TableTopParameters parameters,
             int? buildCount, double? durationMinutes)
         {
             Console.WriteLine();
@@ -118,9 +131,12 @@ namespace StressTesting
             Console.WriteLine($"  Length: {parameters.Length.Value} mm");
             Console.WriteLine($"  Width: {parameters.Width.Value} mm");
             Console.WriteLine($"  Height: {parameters.Height.Value} mm");
-            Console.WriteLine($"  Corner radius: {parameters.CornerRadius.Value} mm");
-            Console.WriteLine($"  Chamfer radius: {parameters.ChamferRadius.Value} mm");
-            Console.WriteLine($"  Wave amplitude: {parameters.WaveAmplitude.Value} mm");
+            Console.WriteLine($"  Corner radius: " +
+                $"{parameters.CornerRadius.Value} mm");
+            Console.WriteLine($"  Chamfer radius: " +
+                $"{parameters.ChamferRadius.Value} mm");
+            Console.WriteLine($"  Wave amplitude: " +
+                $"{parameters.WaveAmplitude.Value} mm");
 
             if (buildCount.HasValue)
             {
@@ -128,13 +144,22 @@ namespace StressTesting
             }
             else if (durationMinutes.HasValue)
             {
-                Console.WriteLine($"  Mode: {durationMinutes.Value} minutes");
+                Console.WriteLine($"  Mode: " +
+                    $"{durationMinutes.Value} minutes");
             }
             Console.WriteLine();
 
-            var fileName = $"log_{testName}_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+            var fileName =
+                $"log_{testName}_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
             var streamWriter = new StreamWriter(fileName);
             streamWriter.WriteLine("№\tTime (ms)\tRAM (GB)");
+
+            var computerInfo = new ComputerInfo();
+            var initialMemory = (computerInfo.TotalPhysicalMemory
+                - computerInfo.AvailablePhysicalMemory)
+                * GigabyteInByte;
+            streamWriter.WriteLine($"0\t0\t{initialMemory:F9}");
+            streamWriter.Flush();
 
             var builder = new TableTopBuilder();
             var stopWatch = new Stopwatch();
@@ -145,7 +170,6 @@ namespace StressTesting
             {
                 testStopwatch.Start();
 
-                // Режим по количеству итераций
                 if (buildCount.HasValue)
                 {
                     for (count = 1; count <= buildCount.Value; count++)
@@ -154,35 +178,35 @@ namespace StressTesting
                         builder.Build(parameters);
                         stopWatch.Stop();
 
-                        // Закрываем созданный документ в КОМПАС
                         builder.CloseDocument();
 
-                        var computerInfo = new ComputerInfo();
                         var usedMemory = (computerInfo.TotalPhysicalMemory
-                                          - computerInfo.AvailablePhysicalMemory)
-                                         * GigabyteInByte;
+                            - computerInfo.AvailablePhysicalMemory)
+                            * GigabyteInByte;
 
                         var timeMs = stopWatch.Elapsed.TotalMilliseconds;
 
-                        streamWriter.WriteLine($"{count}\t{timeMs:F0}\t{usedMemory:F9}");
+                        streamWriter.WriteLine
+                            ($"{count}\t{timeMs:F0}\t{usedMemory:F9}");
                         streamWriter.Flush();
 
-                        // Выводим прогресс в консоль
                         if (count % 10 == 0 || count == buildCount.Value)
                         {
-                            Console.Write($"\rProgress: {count}/{buildCount.Value} " +
-                                         $"({(count * 100.0 / buildCount.Value):F1}%) | " +
-                                         $"Time: {timeMs:F0} ms | " +
-                                         $"RAM: {usedMemory:F2} GB");
+                            Console.Write($"\rProgress: " +
+                                $"{count}/{buildCount.Value} " +
+                                $"({(count * 100.0 /
+                                buildCount.Value):F1}%) | "
+                                + $"Time: {timeMs:F0} ms | " +
+                                $"RAM: {usedMemory:F2} GB");
                         }
 
                         stopWatch.Reset();
                     }
                 }
-                // Режим по времени
                 else if (durationMinutes.HasValue)
                 {
-                    var targetDuration = TimeSpan.FromMinutes(durationMinutes.Value);
+                    var targetDuration =
+                        TimeSpan.FromMinutes(durationMinutes.Value);
                     count = 0;
 
                     while (testStopwatch.Elapsed < targetDuration)
@@ -192,30 +216,30 @@ namespace StressTesting
                         builder.Build(parameters);
                         stopWatch.Stop();
 
-                        // Закрываем созданный документ в КОМПАС
                         builder.CloseDocument();
 
-                        var computerInfo = new ComputerInfo();
                         var usedMemory = (computerInfo.TotalPhysicalMemory
-                                          - computerInfo.AvailablePhysicalMemory)
-                                         * GigabyteInByte;
+                            - computerInfo.AvailablePhysicalMemory)
+                            * GigabyteInByte;
 
                         var timeMs = stopWatch.Elapsed.TotalMilliseconds;
 
-                        streamWriter.WriteLine($"{count}\t{timeMs:F0}\t{usedMemory:F9}");
+                        streamWriter.WriteLine
+                            ($"{count}\t{timeMs:F0}\t{usedMemory:F9}");
                         streamWriter.Flush();
 
-                        // Выводим прогресс в консоль
                         if (count % 10 == 0)
                         {
                             var elapsed = testStopwatch.Elapsed;
                             var remaining = targetDuration - elapsed;
                             Console.Write($"\rProgress: {count} builds | " +
-                                         $"Elapsed: {elapsed.Minutes:D2}:{elapsed.Seconds:D2} / " +
-                                         $"{durationMinutes.Value:F1} min | " +
-                                         $"Remaining: {remaining.Minutes:D2}:{remaining.Seconds:D2} | " +
-                                         $"Time: {timeMs:F0} ms | " +
-                                         $"RAM: {usedMemory:F2} GB");
+                                $"Elapsed: {elapsed.Minutes:D2}:" +
+                                $"{elapsed.Seconds:D2} / "
+                                + $"{durationMinutes.Value:F1} min | " +
+                                $"Remaining: {remaining.Minutes:D2}:" +
+                                $"{remaining.Seconds:D2} | " +
+                                $"Time: {timeMs:F0} ms | " +
+                                $"RAM: {usedMemory:F2} GB");
                         }
 
                         stopWatch.Reset();
@@ -223,7 +247,7 @@ namespace StressTesting
                 }
 
                 testStopwatch.Stop();
-                Console.WriteLine(); // Переход на новую строку после завершения
+                Console.WriteLine();
             }
             catch (Exception ex)
             {
@@ -236,11 +260,14 @@ namespace StressTesting
                 streamWriter.Dispose();
 
                 var totalTime = testStopwatch.Elapsed;
-                Console.WriteLine($"\nTest finished. Models built: {count}");
-                Console.WriteLine($"Total time: {totalTime.Minutes:D2}:{totalTime.Seconds:D2}");
+                Console.WriteLine
+                    ($"\nTest finished. Models built: {count - 1}");
+                Console.WriteLine($"Total time: " +
+                    $"{totalTime.Minutes:D2}:{totalTime.Seconds:D2}");
                 if (count > 0)
                 {
-                    Console.WriteLine($"Average time per build: {totalTime.TotalMilliseconds / count:F0} ms");
+                    Console.WriteLine($"Average time per build:" +
+                        $" {totalTime.TotalMilliseconds / count:F0} ms");
                 }
                 Console.WriteLine($"Results saved to file: {fileName}");
             }
