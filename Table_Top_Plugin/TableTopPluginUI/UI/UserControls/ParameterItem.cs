@@ -90,6 +90,7 @@ namespace TableTopPluginUI.UI.UserControls
                 ToString() + " " + _unit;
         }
 
+        //TODO: RSDN
         /// <summary>
         /// Обработчик проверки вводимого значения параметра.
         /// </summary>
@@ -107,6 +108,8 @@ namespace TableTopPluginUI.UI.UserControls
                 textBox_Value.Text = "0";
             }
         }
+
+        //TODO: RSDN
 
         /// <summary>
         /// Обработчик изменения текста в поле значения параметра.
@@ -156,7 +159,7 @@ namespace TableTopPluginUI.UI.UserControls
             }
         }
 
-        //TODO: RSDN +
+        //TODO: RSDN
         /// <summary>
         /// Обработчик изменения текста в поле границ параметра.
         /// </summary>

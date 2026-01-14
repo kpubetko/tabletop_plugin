@@ -61,6 +61,7 @@
                 _parameters[ParameterType.Length].Value,
                 _parameters[ParameterType.Width].Value);
 
+            //TODO: duplication
             double cornerRadiusDivisor = 
                 _parameters[ParameterType.WaveAmplitude].Value > 0 ? 4 : 2;
 
@@ -116,6 +117,7 @@
                 _parameters[ParameterType.Length].Value,
                 _parameters[ParameterType.Width].Value);
 
+            //TODO: duplication
             double cornerRadiusDivisor = 
                 _parameters[ParameterType.WaveAmplitude].Value > 0 ? 4 : 2;
 

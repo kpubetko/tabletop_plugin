@@ -4,7 +4,7 @@ using TableTopPluginUI.UI.UserControls;
 
 namespace TableTopPluginUI.UI
 {
-    //TODO: RSDN+
+    //TODO: RSDN
     public partial class MainForm : Form
     {
         /// <summary>
@@ -64,6 +64,7 @@ namespace TableTopPluginUI.UI
         {
             foreach (Control c in tableLayoutPanel1.Controls)
             {
+                //TODO: rsdn
                 if (c is ParameterItem item && !item.IsItCorrect)
                     return false;
             }
