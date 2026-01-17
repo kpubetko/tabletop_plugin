@@ -43,17 +43,18 @@
                 += WaveAmplitudeChanged;
         }
 
+        //TODO: duplication+
         /// <summary>
         /// Обработчик изменения длины или ширины столешницы
         /// </summary>
-        /// <param name="sender">Источник события</param>
-        /// <param name="e">Данные события</param>
+        /// <param name="sender">Источник события (не используется).</param>
+        /// <param name="e">Данные события (не используются).</param>
         /// <remarks>
         /// Автоматически обновляет максимальное значение радиуса скругления углов
         /// в зависимости от меньшего из размеров (длины или ширины).
-        /// Если волна включена (амплитуда больше 0), максимум радиуса ограничивается 1/4 от размера,
+        /// Если волна включена (амплитуда больше 0), максимум радиуса ограничивается 1/10 от размера,
         /// иначе 1/2 от размера.
-        /// Также обновляет максимальную амплитуду волны (не более 1/3 от меньшего размера)
+        /// Также обновляет максимальную амплитуду волны (не более 1/5 от меньшего размера)
         /// </remarks>
         private void LengthOrWidthChanged(object sender, EventArgs e)
         {
@@ -61,35 +62,17 @@
                 _parameters[ParameterType.Length].Value,
                 _parameters[ParameterType.Width].Value);
 
-            //TODO: duplication
-            double cornerRadiusDivisor = 
-                _parameters[ParameterType.WaveAmplitude].Value > 0 ? 4 : 2;
-
-            if (_parameters[ParameterType.Length].Value <
-                _parameters[ParameterType.Width].Value)
-            {
-                _parameters[ParameterType.CornerRadius].SetBoundaries(
-                    _parameters[ParameterType.CornerRadius].Min,
-                    _parameters[ParameterType.Length].Value / 
-                    cornerRadiusDivisor);
-            }
-            else
-            {
-                _parameters[ParameterType.CornerRadius].SetBoundaries(
-                    _parameters[ParameterType.CornerRadius].Min,
-                    _parameters[ParameterType.Width].Value / 
-                    cornerRadiusDivisor);
-            }
+            UpdateCornerRadiusMax();
 
             _parameters[ParameterType.WaveAmplitude].SetBoundaries(
-                0, minSize / 3);
+                0, minSize / 5);
         }
 
         /// <summary>
         /// Обработчик изменения высоты столешницы
         /// </summary>
-        /// <param name="sender">Источник события</param>
-        /// <param name="e">Данные события</param>
+        /// <param name="sender">Источник события (не используется).</param>
+        /// <param name="e">Данные события (не используются).</param>
         /// <remarks>
         /// Автоматически обновляет максимальное значение радиуса фаски
         /// в зависимости от половины высоты столешницы
@@ -101,25 +84,39 @@
                 _parameters[ParameterType.Height].Value / 2);
         }
 
+        //TODO: duplication+
         /// <summary>
         /// Обработчик изменения амплитуды волны
         /// </summary>
-        /// <param name="sender">Источник события</param>
-        /// <param name="e">Данные события</param>
+        /// <param name="sender">Источник события (не используется).</param>
+        /// <param name="e">Данные события (не используются).</param>
         /// <remarks>
         /// При изменении амплитуды волны обновляет максимальное значение радиуса скругления углов.
-        /// Если волна включена (амплитуда больше 0), максимум ограничивается 1/4 от меньшего размера,
+        /// Если волна включена (амплитуда больше 0), максимум ограничивается 1/10 от меньшего размера,
         /// иначе 1/2 от меньшего размера
         /// </remarks>
         private void WaveAmplitudeChanged(object sender, EventArgs e)
+        {
+            UpdateCornerRadiusMax();
+        }
+
+        /// <summary>
+        /// Обновляет максимальное значение радиуса скругления углов
+        /// в зависимости от размеров столешницы и наличия волны
+        /// </summary>
+        /// <remarks>
+        /// Вычисляет минимальный размер из длины и ширины столешницы.
+        /// Если волна включена (амплитуда больше 0), устанавливает максимум равным 1/10 от минимального размера,
+        /// иначе 1/2 от минимального размера
+        /// </remarks>
+        private void UpdateCornerRadiusMax()
         {
             double minSize = Math.Min(
                 _parameters[ParameterType.Length].Value,
                 _parameters[ParameterType.Width].Value);
 
-            //TODO: duplication
-            double cornerRadiusDivisor = 
-                _parameters[ParameterType.WaveAmplitude].Value > 0 ? 4 : 2;
+            double cornerRadiusDivisor =
+                _parameters[ParameterType.WaveAmplitude].Value > 0 ? 10 : 2;
 
             _parameters[ParameterType.CornerRadius].SetBoundaries(
                 _parameters[ParameterType.CornerRadius].Min,
@@ -165,7 +162,7 @@
         /// <remarks>
         /// Максимальное значение автоматически ограничивается в зависимости от наличия волны:
         /// - Если волна отключена (амплитуда = 0): максимум = 1/2 от меньшего размера
-        /// - Если волна включена (амплитуда больше 0): максимум = 1/4 от меньшего размера
+        /// - Если волна включена (амплитуда больше 0): максимум = 1/10 от меньшего размера
         /// </remarks>
         public Parameter CornerRadius
         {
@@ -193,7 +190,7 @@
         /// Получает параметр амплитуды волны по периметру
         /// </summary>
         /// <remarks>
-        /// Максимальное значение автоматически ограничивается 1/3 от меньшего размера (длины или ширины).
+        /// Максимальное значение автоматически ограничивается 1/5 от меньшего размера (длины или ширины).
         /// При значении 0 строится прямоугольник без волн
         /// </remarks>
         public Parameter WaveAmplitude

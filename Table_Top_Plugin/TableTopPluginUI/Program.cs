@@ -1,10 +1,13 @@
 using TableTopPluginUI.UI;
 namespace TableTopPluginUI
 {
+    /// <summary>
+    /// Класс, содержащий точку входа в приложение.
+    /// </summary>
     internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
         static void Main()

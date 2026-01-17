@@ -4,7 +4,11 @@ using TableTopPluginUI.UI.UserControls;
 
 namespace TableTopPluginUI.UI
 {
-    //TODO: RSDN
+    //TODO: rsdn +
+    /// <summary>
+    /// Главная форма приложения, предоставляющая пользовательский интерфейс 
+    /// для ввода параметров столешницы и запуска процесса построения 3D-модели.
+    /// </summary>
     public partial class MainForm : Form
     {
         /// <summary>
@@ -62,11 +66,13 @@ namespace TableTopPluginUI.UI
         /// </summary>
         private bool CheckValues()
         {
-            foreach (Control c in tableLayoutPanel1.Controls)
+            foreach (Control control in tableLayoutPanel1.Controls)
             {
-                //TODO: rsdn
-                if (c is ParameterItem item && !item.IsItCorrect)
+                //TODO: rsdn +
+                if (control is ParameterItem item && !item.IsItCorrect)
+                {
                     return false;
+                }
             }
             return true;
         }

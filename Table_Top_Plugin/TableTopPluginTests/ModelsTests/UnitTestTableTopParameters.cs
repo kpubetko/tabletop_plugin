@@ -82,12 +82,12 @@ namespace Table_Top_Plugin.Tests.Models
 
             tableTopParams.Width.Value = 1200;
 
-            Assert.AreEqual(400, tableTopParams.WaveAmplitude.Max);
+            Assert.AreEqual(240, tableTopParams.WaveAmplitude.Max);
         }
 
         [Test]
         [Description("Проверяет, что при включении волны максимум радиуса" +
-            " скругления уменьшается до 1/4 от размера")]
+            " скругления уменьшается до 1/10 от размера")]
         public void WaveAmplitudeChanged_WhenWaveEnabled_ShouldReduceCornerRadiusMax()
         {
             var tableTopParams = new TableTopParameters();
@@ -96,7 +96,7 @@ namespace Table_Top_Plugin.Tests.Models
 
             tableTopParams.WaveAmplitude.Value = 100;
 
-            Assert.AreEqual(400, tableTopParams.CornerRadius.Max);
+            Assert.AreEqual(160, tableTopParams.CornerRadius.Max);
         }
 
         [Test]
@@ -116,8 +116,8 @@ namespace Table_Top_Plugin.Tests.Models
 
         [Test]
         [Description("Проверяет, что при изменении размеров с включенной " +
-            "волной радиус скругления ограничивается 1/4")]
-        public void LengthOrWidthChanged_WithWaveEnabled_ShouldLimitCornerRadiusToQuarter()
+            "волной радиус скругления ограничивается 1/10")]
+        public void LengthOrWidthChanged_WithWaveEnabled_ShouldLimitCornerRadiusToTenth()
         {
             var tableTopParams = new TableTopParameters();
             tableTopParams.Length.Value = 2000;
@@ -126,7 +126,7 @@ namespace Table_Top_Plugin.Tests.Models
 
             tableTopParams.Width.Value = 1200;
 
-            Assert.AreEqual(300, tableTopParams.CornerRadius.Max);
+            Assert.AreEqual(120, tableTopParams.CornerRadius.Max);
         }
 
         [Test]

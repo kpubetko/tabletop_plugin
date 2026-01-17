@@ -13,13 +13,13 @@ namespace StressTesting
         /// <summary>
         /// Коэффициент преобразования байтов в гигабайты
         /// </summary>
-        private const double GigabyteInByte = 
+        private const double GigabyteInByte =
             0.000000000931322574615478515625;
 
         /// <summary>
         /// Точка входа в программу
         /// </summary>
-        /// <param name="args">Аргументы командной строки</param>
+        /// <param name="args">Аргументы командной строки (не используются).</param>
         static void Main(string[] args)
         {
             Console.WriteLine("=== TableTop Plugin Stress Testing ===");
@@ -276,48 +276,48 @@ namespace StressTesting
         /// <summary>
         /// Получает минимальные параметры столешницы
         /// </summary>
-        /// <returns>Параметры столешницы</returns>
+        /// <returns>Параметры столешницы с минимальными значениями</returns>
         private static TableTopParameters GetMinimalParameters()
         {
             var parameters = new TableTopParameters();
             parameters.Length.Value = 1000;
             parameters.Width.Value = 1000;
             parameters.Height.Value = 15;
+            parameters.WaveAmplitude.Value = 0;
             parameters.CornerRadius.Value = 0;
             parameters.ChamferRadius.Value = 0;
-            parameters.WaveAmplitude.Value = 0;
             return parameters;
         }
 
         /// <summary>
         /// Получает средние параметры столешницы
         /// </summary>
-        /// <returns>Параметры столешницы</returns>
+        /// <returns>Параметры столешницы со средними значениями</returns>
         private static TableTopParameters GetAverageParameters()
         {
             var parameters = new TableTopParameters();
             parameters.Length.Value = 1750;
             parameters.Width.Value = 1750;
             parameters.Height.Value = 32;
+            parameters.WaveAmplitude.Value = 0;
             parameters.CornerRadius.Value = 200;
             parameters.ChamferRadius.Value = 5;
-            parameters.WaveAmplitude.Value = 0;
             return parameters;
         }
 
         /// <summary>
         /// Получает максимальные параметры столешницы
         /// </summary>
-        /// <returns>Параметры столешницы</returns>
+        /// <returns>Параметры столешницы с максимальными значениями</returns>
         private static TableTopParameters GetMaximalParameters()
         {
             var parameters = new TableTopParameters();
             parameters.Length.Value = 2500;
             parameters.Width.Value = 2500;
             parameters.Height.Value = 50;
-            parameters.CornerRadius.Value = 250;
+            parameters.WaveAmplitude.Value = 400;
+            parameters.CornerRadius.Value = 200;
             parameters.ChamferRadius.Value = 10;
-            parameters.WaveAmplitude.Value = 300;
             return parameters;
         }
     }
