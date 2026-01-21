@@ -4,7 +4,6 @@ using TableTopPluginUI.UI.UserControls;
 
 namespace TableTopPluginUI.UI
 {
-    //TODO: rsdn +
     /// <summary>
     /// Главная форма приложения, предоставляющая пользовательский интерфейс 
     /// для ввода параметров столешницы и запуска процесса построения 3D-модели.
@@ -68,7 +67,6 @@ namespace TableTopPluginUI.UI
         {
             foreach (Control control in tableLayoutPanel1.Controls)
             {
-                //TODO: rsdn +
                 if (control is ParameterItem item && !item.IsItCorrect)
                 {
                     return false;

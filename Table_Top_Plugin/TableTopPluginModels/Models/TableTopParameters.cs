@@ -43,7 +43,6 @@
                 += WaveAmplitudeChanged;
         }
 
-        //TODO: duplication+
         /// <summary>
         /// Обработчик изменения длины или ширины столешницы
         /// </summary>
@@ -84,7 +83,6 @@
                 _parameters[ParameterType.Height].Value / 2);
         }
 
-        //TODO: duplication+
         /// <summary>
         /// Обработчик изменения амплитуды волны
         /// </summary>

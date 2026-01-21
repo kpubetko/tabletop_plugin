@@ -90,7 +90,6 @@ namespace TableTopPluginUI.UI.UserControls
                 ToString() + " " + _unit;
         }
 
-        //TODO: RSDN+
         /// <summary>
         /// Обработчик проверки вводимого значения параметра.
         /// </summary>
@@ -109,7 +108,6 @@ namespace TableTopPluginUI.UI.UserControls
             }
         }
 
-        //TODO: RSDN+
         /// <summary>
         /// Обработчик изменения текста в поле значения параметра.
         /// </summary>
@@ -160,7 +158,6 @@ namespace TableTopPluginUI.UI.UserControls
             }
         }
 
-        //TODO: RSDN+
         /// <summary>
         /// Обработчик изменения текста в поле границ параметра.
         /// </summary>
