@@ -46,7 +46,7 @@
             button_Build.TabIndex = 10;
             button_Build.Text = "Построить объект";
             button_Build.UseVisualStyleBackColor = true;
-            button_Build.Click += button_Build_Click;
+            button_Build.Click += ButtonBuildClick;
             // 
             // progressBarMain
             // 

@@ -82,7 +82,7 @@ namespace TableTopPluginUI.UI
         /// </summary>
         /// <param name="sender">Источник события (не используется).</param>
         /// <param name="e">Данные события (не используются).</param>
-        private async void button_Build_Click(object sender, EventArgs e)
+        private async void ButtonBuildClick(object sender, EventArgs e)
         {
             if (CheckValues())
             {

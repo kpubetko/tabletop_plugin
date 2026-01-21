@@ -100,7 +100,7 @@ namespace TableTopPluginUI.UI.UserControls
         /// При некорректном формате значения (невозможно преобразовать в число)
         /// отменяет переход фокуса на другой контрол и сбрасывает значение в 0.
         /// </remarks>
-        private void textBox_Value_Validating(object sender, CancelEventArgs e)
+        private void TextBoxValueValidating(object sender, CancelEventArgs e)
         {
             if (!double.TryParse(textBox_Value.Text, out double _))
             {
@@ -122,7 +122,7 @@ namespace TableTopPluginUI.UI.UserControls
         /// с описанием ошибки. При корректном значении восстанавливает
         /// стандартный цвет фона и скрывает подсказку.
         /// </remarks>
-        private void textBox_Value_TextChanged(object sender, EventArgs e)
+        private void TextBoxValueTextChanged(object sender, EventArgs e)
         {
             if (!double.TryParse(textBox_Value.Text, out double parsedValue))
             {
@@ -173,7 +173,7 @@ namespace TableTopPluginUI.UI.UserControls
         /// При корректном значении восстанавливает стандартный цвет фона и
         /// скрывает подсказку.
         /// </remarks>
-        private void label_Bounds_TextChanged(object sender, EventArgs e)
+        private void LabelBoundsTextChanged(object sender, EventArgs e)
         {
             double.TryParse(textBox_Value.Text, out double parsedValue);
             if (parsedValue < _parameter.Min || parsedValue > _parameter.Max)
